@@ -51,15 +51,15 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function setName(string $name)
+    public function setDescription(string $description)
     {
-        $this->description = $name;
+        $this->description = $description;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName(): string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -110,5 +110,13 @@ class Aquarium implements AquariumInterface
     public function getVolume(): float
     {
         return $this->volume;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFish(): float
+    {
+        // TODO
     }
 }

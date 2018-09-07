@@ -45,7 +45,7 @@ class Fish extends BaseFish
     protected $fins;
 
     /**
-     * @ORM\OneToOne(targetEntity="Picture", cascade={"PERSIST"})
+     * @ORM\OneToOne(targetEntity="Picture", cascade={"PERSIST", "REMOVE"})
      * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
      */
     protected $picture;

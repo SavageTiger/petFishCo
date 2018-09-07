@@ -5,7 +5,7 @@ namespace SvenH\PetFishCo\Model;
 /**
  * Event of a fish being placed in a aquarium
  */
-class Relation implements RelationInterface
+class AquariumMutation implements AquariumMutationInterface
 {
     /**
      * @var int
@@ -23,18 +23,25 @@ class Relation implements RelationInterface
     protected $aquarium;
 
     /**
+     * @var int
+     */
+    protected $amount;
+
+    /**
      * @var \DateTime
      */
     protected $timestamp;
 
     /**
-     * @param FishInterface          $fish
-     * @param AquariumInterface|null $aquarium
+     * @param FishInterface     $fish
+     * @param AquariumInterface $aquarium
+     * @param int               $amount
      */
-    public function __construct(FishInterface $fish, AquariumInterface $aquarium = null)
+    public function __construct(FishInterface $fish, AquariumInterface $aquarium, int $amount = 0)
     {
         $this->fish      = $fish;
         $this->aquarium  = $aquarium;
+        $this->amount    = $amount;
         $this->timestamp = new \DateTime();
     }
 
@@ -49,9 +56,17 @@ class Relation implements RelationInterface
     /**
      * {@inheritdoc}
      */
-    public function getAquarium(): ?AquariumInterface
+    public function getAquarium(): AquariumInterface
     {
         return $this->aquarium;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAmount(): int
+    {
+       return $this->amount;
     }
 
     /**

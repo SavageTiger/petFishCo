@@ -2,27 +2,13 @@
 
 namespace SvenH\PetFishCo\DataFixtures;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Psr\Container\ContainerInterface;
 
-class FishFixtures implements FixtureInterface, OrderedFixtureInterface
+class FishFixtures extends AbstractFixture
 {
-    /**
-     * @var ContainerInterface
-     */
-    protected $container;
-
-    public function __construct(ContainerInterface $container)
-    {
-        $this->container = $container;
-    }
-
     public function load(ObjectManager $manager)
     {
-        $propertyManager = $this->container->get('petfishco.manager.property');
-        $fishManager     = $this->container->get('petfishco.manager.fish');
+        $fishManager = $this->container->get('petfishco.manager.fish');
 
         $fishFixtures = [
             [
@@ -59,11 +45,7 @@ class FishFixtures implements FixtureInterface, OrderedFixtureInterface
         ];
 
         foreach ($fishFixtures as $fish) {
-            if ($propertyManager->findProperty($fish['family'], 'Fish Family') === null) {
-                $property = $propertyManager->createProperty($fish['family'], 'Fish Family', true);
-
-                $manager->persist($property);
-            }
+            $this->createProperty($fish['family'], 'Fish Family');
 
             $imageFilename = str_replace(['(', ' ', ')'], '_', strtolower($fish['name'])) . '.jpg';
             $imageBinary   = file_get_contents(__DIR__ . '/Pictures/' . $imageFilename);

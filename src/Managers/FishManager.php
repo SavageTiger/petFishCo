@@ -5,9 +5,10 @@ namespace SvenH\PetFishCo\Managers;
 use Doctrine\ORM\EntityManagerInterface;
 use SvenH\PetFishCo\Entity\Fish;
 use SvenH\PetFishCo\Model\FishInterface;
+use SvenH\PetFishCo\Model\PropertyInterface;
 
 /**
- * ORM manager for fish entity
+ * Manager for fish entity
  */
 class FishManager
 {
@@ -41,20 +42,20 @@ class FishManager
     /**
      * Create a fish
      *
-     * @param string      $name
-     * @param string      $latinName
-     * @param int         $finAmount
-     * @param string      $family
-     * @param string      $color
-     * @param string|null $pictureFilename
-     * @param string|null $picture
+     * @param string                   $name
+     * @param string                   $latinName
+     * @param int                      $finAmount
+     * @param string|PropertyInterface $family
+     * @param string                   $color
+     * @param string|null              $pictureFilename
+     * @param string|null              $picture
      *
      * @throws \Exception
      *
      * @return FishInterface
      */
     public function createFish(
-        string $name, string $latinName, int $finAmount, string $family, string $color,
+        string $name, string $latinName, int $finAmount, $family, string $color,
         string $pictureFilename = null, string $picture = null): FishInterface
     {
         $fish = new Fish();
@@ -63,7 +64,9 @@ class FishManager
         $fish->setAmount($finAmount);
         $fish->setColor($color);
 
-        $family = $this->propertyManager->findProperty($family, 'Fish Family');
+        if (($family instanceof PropertyInterface) === false) {
+            $family = $this->propertyManager->findProperty($family, 'Fish Family');
+        }
 
         if ($family === null) {
             throw new \Exception('Requested fish family was not found');
@@ -78,6 +81,18 @@ class FishManager
         }
 
         return $fish;
+    }
+
+    /**
+     * Find fish by its name
+     *
+     * @param string $name
+     *
+     * @return null|FishInterface
+     */
+    public function findOneByName(string $name): ?FishInterface
+    {
+        return $this->em->getRepository(Fish::class)->findOneBy([ 'name' => $name ]);
     }
 
 }

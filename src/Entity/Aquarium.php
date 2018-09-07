@@ -14,6 +14,7 @@ class Aquarium extends BaseAquarium
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue("UUID")
      */
     protected $id;
 
@@ -36,6 +37,11 @@ class Aquarium extends BaseAquarium
      * @ORM\Column(type="float", nullable=false)
      */
     protected $volume;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AquariumMutation", mappedBy="aquarium")
+     */
+    protected $mutations;
 
     /**
      * @return string

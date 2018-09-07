@@ -24,16 +24,16 @@ interface AquariumInterface
     /**
      * Set description
      *
-     * @param string $name
+     * @param string $description
      */
-    public function setName(string $name);
+    public function setDescription(string $description);
 
     /**
      * Get description
      *
      * @return string
      */
-    public function getName(): string;
+    public function getDescription(): string;
 
     /**
      * Set the shape
@@ -76,4 +76,11 @@ interface AquariumInterface
       * @return float
       */
      public function getVolume(): float;
+
+     /**
+      * Get the amount of fish in this aquarium in the following format [ FishInterface => <count>, ... ]
+      *
+      * @return array
+      */
+     public function getFish();
 }

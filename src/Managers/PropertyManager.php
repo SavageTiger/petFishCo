@@ -7,7 +7,7 @@ use SvenH\PetFishCo\Entity\Property;
 use SvenH\PetFishCo\Model\PropertyInterface;
 
 /**
- * ORM manager for property entity
+ * Manager for property entity
  */
 class PropertyManager
 {
@@ -17,7 +17,8 @@ class PropertyManager
     protected const PROPERTY_TYPES = [
         0 => 'Glass',
         1 => 'Shape',
-        2 => 'Fish Family'
+        2 => 'Fish Family',
+        3 => 'Restriction'
     ];
 
     /**

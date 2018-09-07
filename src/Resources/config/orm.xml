@@ -7,5 +7,15 @@
             <tag name="doctrine.fixture.orm" />
         </service>
 
+        <service id="petfishco.fixtures.aquarium" class="SvenH\PetFishCo\DataFixtures\AquariumFixtures">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <service id="petfishco.fixtures.mutations" class="SvenH\PetFishCo\DataFixtures\MutationFixtures">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
     </services>
 </container>

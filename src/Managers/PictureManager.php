@@ -6,7 +6,7 @@ use SvenH\PetFishCo\Entity\Picture;
 use SvenH\PetFishCo\Model\PictureInterface;
 
 /**
- * ORM manager for picture entity
+ * Manager for picture entity
  */
 class PictureManager
 {
