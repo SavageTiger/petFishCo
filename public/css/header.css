@@ -1,0 +1,25 @@
+
+.logo {
+    font-size: 23px;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.navbar-brand {
+    position: relative;
+    top: -5px;
+}
+
+.navbar-brand span {
+    position: absolute;
+    top: 30px;
+}
+
+.sub-header {
+    display: block;
+    font-size: 10px;
+}
+
+.nav-item i {
+    font-size: 21px;
+}

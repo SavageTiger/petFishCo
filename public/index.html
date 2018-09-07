@@ -4,15 +4,32 @@
          <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
         <!-- Vendor -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.2/angular.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
         <!-- App -->
-        <script src="./src/app.js"></script>
+        <script src="src/controllers/app.js"></script>
+        <script src="src/controllers/header.js"></script>
+        <script src="src/controllers/fish.js"></script>
+        <script src="src/model/fish.js"></script>
+        <script src="src/model/fish-collection.js"></script>
 
         <link rel="stylesheet" href="./css/app.css" />
+        <link rel="stylesheet" href="./css/header.css" />
+        <link rel="stylesheet" href="./css/view.css" />
     </head>
     <body ng-app="petFishCo">
-        <div ng-controller="main"></div>
+        <div ng-controller="mainCtrl">
+
+            <div ng-controller="headerCtrl">
+                <div ng-include="headerTpl"></div>
+            </div>
+
+            <div class="container bg-light">
+                <div ng-include="viewTpl"></div>
+            </div>
+
+        </div>
     </body>
 </html>

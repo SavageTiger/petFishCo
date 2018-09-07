@@ -13,3 +13,11 @@ body {
     background-position: right;
     background-size: 100%;
 }
+
+.container {
+    margin-top: 50px;
+}
+
+.bg-light {
+    background: rgba(255, 255, 255, 0.8) !important;
+}

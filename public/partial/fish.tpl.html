@@ -1,0 +1,17 @@
+
+<div ng-controller="fishCtrl">
+
+    <div class="row">
+        <div class="col-md-6">
+
+            <div ng-repeat="fish in fishes|orderBy:family" class="link" ng-class-even="'even'" ng-class-odd="'odd'">
+                <div ng-if="shouldRenderHeader(fish)">
+                    <h3>{{ fish.family }}</h3>
+                </div>
+
+                <a href="#" ng-click="selectFish(fish)">{{ fish.name }}</a>
+            </div>
+
+        </div>
+    </div>
+</div>

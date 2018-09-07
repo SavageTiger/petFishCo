@@ -12,7 +12,7 @@ use SvenH\PetFishCo\Model\PropertyInterface;
 /**
  * Manager for aquarium entity
  */
-class AquariumManager
+class AquariumManager extends AbstractORMManager
 {
     /**
      * @var PropertyManager
@@ -27,6 +27,7 @@ class AquariumManager
     {
         $this->em              = $em;
         $this->propertyManager = $propertyManager;
+        $this->className       = Aquarium::class;
     }
 
     /**
@@ -77,17 +78,5 @@ class AquariumManager
         $aquarium->setVolume($volume);
 
         return $aquarium;
-    }
-
-    /**
-     * Find aquariumInterface by its description
-     *
-     * @param string $name
-     *
-     * @return null|AquariumInterface
-     */
-    public function findOneByDescription(string $description): ?AquariumInterface
-    {
-        return $this->em->getRepository(Aquarium::class)->findOneBy([ 'description' => $description ]);
     }
 }

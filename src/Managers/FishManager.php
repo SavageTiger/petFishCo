@@ -10,13 +10,8 @@ use SvenH\PetFishCo\Model\PropertyInterface;
 /**
  * Manager for fish entity
  */
-class FishManager
+class FishManager extends AbstractORMManager
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
-
     /**
      * PropertyManager
      */
@@ -37,6 +32,7 @@ class FishManager
         $this->em              = $em;
         $this->propertyManager = $propertyManager;
         $this->pictureManager  = $pictureManager;
+        $this->className       = Fish::class;
     }
 
     /**
@@ -82,17 +78,4 @@ class FishManager
 
         return $fish;
     }
-
-    /**
-     * Find fish by its name
-     *
-     * @param string $name
-     *
-     * @return null|FishInterface
-     */
-    public function findOneByName(string $name): ?FishInterface
-    {
-        return $this->em->getRepository(Fish::class)->findOneBy([ 'name' => $name ]);
-    }
-
 }

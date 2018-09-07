@@ -3,6 +3,7 @@
 namespace SvenH\PetFishCo\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Aquarium
@@ -20,7 +21,7 @@ class Aquarium implements AquariumInterface
     protected $description;
 
     /**
-     * @var PropertyInterface
+     * @var PropertyInteface
      */
     protected $shape;
 
@@ -49,6 +50,8 @@ class Aquarium implements AquariumInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @Groups({"list"})
      */
     public function getId(): string
     {
@@ -65,6 +68,8 @@ class Aquarium implements AquariumInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @Groups({"list"})
      */
     public function getDescription(): string
     {

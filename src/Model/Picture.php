@@ -2,6 +2,8 @@
 
 namespace SvenH\PetFishCo\Model;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 /**
  * Picture
  */
@@ -23,7 +25,7 @@ class Picture implements PictureInterface
     protected $binary;
 
     /**
-     * @param string $fileName
+     * @param string $filename
      * @param string $binary
      */
     public function __construct(string $filename, string $binary)
@@ -42,6 +44,8 @@ class Picture implements PictureInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @Groups({"list", "detail"})
      */
     public function getFilename(): string
     {
@@ -50,9 +54,19 @@ class Picture implements PictureInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @Groups({"detail"})
      */
-    public function getBinary(): string
+    public function getBinary(bool $asBase64 = true): string
     {
-        return base64_decode($this->binary);
+        if (is_resource($this->binary) === true) {
+            $this->binary = stream_get_contents($this->binary);
+        }
+
+        if ($asBase64 === false) {
+            return base64_decode($this->binary);
+        }
+
+        return $this->binary;
     }
 }

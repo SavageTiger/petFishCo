@@ -22,9 +22,11 @@ interface PictureInterface
     public function getFilename(): string;
 
     /**
-     * Set binary data
+     * Get binary
      *
-     * @param string $name
+     * @param bool $asBase64
+     *
+     * @return mixed
      */
-    public function getBinary();
+    public function getBinary(bool $asBase64 = true);
 }
