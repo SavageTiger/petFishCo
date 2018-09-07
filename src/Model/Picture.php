@@ -29,7 +29,7 @@ class Picture implements PictureInterface
     public function __construct(string $filename, string $binary)
     {
         $this->filename = $filename;
-        $this->binary   = $binary;
+        $this->binary   = base64_encode($binary);
     }
 
     /**
@@ -53,6 +53,6 @@ class Picture implements PictureInterface
      */
     public function getBinary(): string
     {
-        return $this->binary;
+        return base64_decode($this->binary);
     }
 }

@@ -23,7 +23,7 @@ class Fish implements FishInterface
     protected $latinName;
 
     /**
-     * @var PropertyValueInterface
+     * @var PropertyInterface
      */
     protected $family;
 
@@ -41,14 +41,6 @@ class Fish implements FishInterface
      * @var PictureInterface
      */
     protected $picture;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setId(string $id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * {@inheritdoc}
@@ -93,7 +85,7 @@ class Fish implements FishInterface
     /**
      * {@inheritdoc}
      */
-    public function setFamily(PropertyValueInterface $family)
+    public function setFamily(PropertyInterface $family)
     {
         $this->family = $family;
     }
@@ -101,7 +93,7 @@ class Fish implements FishInterface
     /**
      * {@inheritdoc}
      */
-    public function getFamily(): PropertyValueInterface
+    public function getFamily(): PropertyInterface
     {
         return $this->family;
     }

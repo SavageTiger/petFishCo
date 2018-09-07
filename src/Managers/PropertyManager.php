@@ -4,7 +4,11 @@ namespace SvenH\PetFishCo\Managers;
 
 use Doctrine\ORM\EntityManagerInterface;
 use SvenH\PetFishCo\Entity\Property;
+use SvenH\PetFishCo\Model\PropertyInterface;
 
+/**
+ * ORM manager for property entity
+ */
 class PropertyManager
 {
     /**
@@ -36,10 +40,13 @@ class PropertyManager
      *
      * @param string $value
      * @param string $typeName
+     * @param bool   $persist
      *
      * @throws \Exception
+     *
+     * @return PropertyInterface
      */
-    public function createProperty(string $value, string $typeName)
+    public function createProperty(string $value, string $typeName, bool $persist = false): PropertyInterface
     {
         $type = $this->getTypeIdByName($typeName);
 
@@ -49,9 +56,14 @@ class PropertyManager
 
         $property = new Property($value, $type);
 
-        $this->em->persist($property);
-        $this->em->flush();
+        if ($persist === true) {
+            $this->em->persist($property);
+            $this->em->flush();
+        }
+
+        return $property;
     }
+
 
     /**
      * Get a table of available identifier codes for
@@ -61,7 +73,7 @@ class PropertyManager
      *
      * @return array
      */
-    public function getAvailableTypes()
+    public function getAvailableTypes(): array
     {
         return self::PROPERTY_TYPES;
     }
@@ -73,7 +85,7 @@ class PropertyManager
      *
      * @return int|null
      */
-    public function getTypeIdByName(string $name)
+    public function getTypeIdByName(string $name): ?int
     {
         $types = $this->getAvailableTypes();
 
@@ -87,18 +99,18 @@ class PropertyManager
     }
 
     /**
-     * Is their a property present with the given value and type
+     * Find a property object by type and value criteria
      *
      * @param string $value
      * @param string $typeName
      *
-     * @return bool
+     * @return PropertyInterface|null
      */
-    public function propertyExists(string $value, string $typeName)
+    public function findProperty(string $value, string $typeName): ?PropertyInterface
     {
-        return (bool) ($this->em->getRepository(Property::class)->findOneBy([
+        return $this->em->getRepository(Property::class)->findOneBy([
             'value' => $value,
             'type'  => $this->getTypeIdByName($typeName)
-        ]) !== null);
+        ]);
     }
 }

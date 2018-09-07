@@ -22,6 +22,7 @@ class FishFixtures implements FixtureInterface, OrderedFixtureInterface
     public function load(ObjectManager $manager)
     {
         $propertyManager = $this->container->get('petfishco.manager.property');
+        $fishManager     = $this->container->get('petfishco.manager.fish');
 
         $fishFixtures = [
             [
@@ -58,11 +59,29 @@ class FishFixtures implements FixtureInterface, OrderedFixtureInterface
         ];
 
         foreach ($fishFixtures as $fish) {
-            if ($propertyManager->propertyExists($fish['family'], 'Fish Family') === false) {
-                $propertyManager->createProperty($fish['family'], 'Fish Family');
+            if ($propertyManager->findProperty($fish['family'], 'Fish Family') === null) {
+                $property = $propertyManager->createProperty($fish['family'], 'Fish Family', true);
+
+                $manager->persist($property);
             }
+
+            $imageFilename = str_replace(['(', ' ', ')'], '_', strtolower($fish['name'])) . '.jpg';
+            $imageBinary   = file_get_contents(__DIR__ . '/Pictures/' . $imageFilename);
+
+            $fish = $fishManager->createFish(
+                $fish['name'],
+                $fish['latinName'],
+                $fish['fins'],
+                $fish['family'],
+                $fish['color'],
+                $imageFilename,
+                $imageBinary
+            );
+
+            $manager->persist($fish);
         }
 
+        $manager->flush();
     }
 
     public function getOrder()

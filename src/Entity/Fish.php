@@ -14,6 +14,7 @@ class Fish extends BaseFish
     /**
      * @ORM\Id
      * @ORM\Column(type="guid")
+     * @ORM\GeneratedValue("UUID")
      */
     protected $id;
 
@@ -28,8 +29,8 @@ class Fish extends BaseFish
     protected $latinName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PropertyValue")
-     * @ORM\JoinColumn(name="family_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Property")
+     * @ORM\JoinColumn(name="family_id", referencedColumnName="id", nullable=false)
      */
     protected $family;
 
@@ -44,8 +45,8 @@ class Fish extends BaseFish
     protected $fins;
 
     /**
-     * @ORM\OneToOne(targetEntity="Picture")
-     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Picture", cascade={"PERSIST"})
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
      */
     protected $picture;
 

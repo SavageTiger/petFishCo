@@ -24,7 +24,7 @@ class Picture extends BasePicture
     protected $filename;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=64)
+     * @ORM\Column(type="binary", name="image_binary", nullable=false, length=16777215)
      */
     protected $binary;
 

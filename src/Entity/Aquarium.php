@@ -23,12 +23,12 @@ class Aquarium extends BaseAquarium
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PropertyValue")
+     * @ORM\ManyToOne(targetEntity="Property")
      */
     protected $shape;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PropertyValue")
+     * @ORM\ManyToOne(targetEntity="Property")
      */
     protected $glassType;
 

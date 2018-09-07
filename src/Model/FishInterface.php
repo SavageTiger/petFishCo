@@ -8,13 +8,6 @@ namespace SvenH\PetFishCo\Model;
 interface FishInterface
 {
     /**
-     * Set the id
-     *
-     * @param string $id
-     */
-    public function setId(string $id);
-
-    /**
      * Get the id
      *
      * @return string
@@ -52,16 +45,16 @@ interface FishInterface
     /**
      * Set fish family
      *
-     * @param PropertyValueInterface $family
+     * @param PropertyInterface $family
      */
-    public function setFamily(PropertyValueInterface $family);
+    public function setFamily(PropertyInterface $family);
 
     /**
      * Get fish family
      *
-     * @return PropertyValueInterface
+     * @return PropertyInterface
      */
-    public function getFamily(): PropertyValueInterface;
+    public function getFamily(): PropertyInterface;
 
     /**
      * Set the primary color of the fish in hexadecimal notation
@@ -101,7 +94,7 @@ interface FishInterface
     /**
      * Get a picture of this fish
      *
-     * @return PictureInterface
+     * @return PictureInterface|null
      */
-    public function getPicture(): PictureInterface;
+    public function getPicture(): ?PictureInterface;
 }

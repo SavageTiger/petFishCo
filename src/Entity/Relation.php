@@ -7,7 +7,7 @@ use SvenH\PetFishCo\Model\Relation as BaseRelation;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="aquarium_fish")
+ * @ORM\Table(name="aquarium_fish_relatio")
  */
 class Relation extends BaseRelation
 {
