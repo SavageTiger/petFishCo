@@ -2,4 +2,4 @@
 
 $_SERVER ['APP_ENV'] = 'dev';
 
-require('index.php');
+require('api.php');

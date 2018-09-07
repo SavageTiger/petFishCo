@@ -3,7 +3,9 @@
 namespace SvenH\PetFishCo\Model;
 
 /**
- * Event of a fish being placed in a aquarium
+ * When multiple fish are added or removed from a aquarium
+ * we add a mutation so we can always reconstruct the state of the tank
+ * in a certain moment in time
  */
 class AquariumMutation implements AquariumMutationInterface
 {

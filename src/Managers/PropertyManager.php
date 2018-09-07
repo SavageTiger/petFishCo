@@ -70,7 +70,7 @@ class PropertyManager
      * Get a table of available identifier codes for
      * property types
      *
-     * eg ['1337' => 'Pizza toppings']
+     * e.g. [1337 => 'Pizza toppings']
      *
      * @return array
      */

@@ -52,9 +52,9 @@ class MutationFixtures extends AbstractFixture
 
                 $aquariumManager->mutate($fish, $aquarium, $amount);
             }
-
         }
 
+        $manager->flush();
     }
 
     public function getOrder()

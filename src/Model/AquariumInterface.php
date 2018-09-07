@@ -8,13 +8,6 @@ namespace SvenH\PetFishCo\Model;
 interface AquariumInterface
 {
     /**
-     * Set the id
-     *
-     * @param string $id
-     */
-    public function setId(string $id);
-
-    /**
      * Get the id
      *
      * @return string
@@ -78,9 +71,9 @@ interface AquariumInterface
      public function getVolume(): float;
 
      /**
-      * Get the amount of fish in this aquarium in the following format [ FishInterface => <count>, ... ]
+      * Get the amount of fish in this aquarium in the following format [ 'fish-uuid' => <count>, ... ]
       *
       * @return array
       */
-     public function getFish();
+     public function getFishInventory(): array;
 }

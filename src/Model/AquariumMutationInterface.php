@@ -2,9 +2,6 @@
 
 namespace SvenH\PetFishCo\Model;
 
-/**
- * The last known location of a fish
- */
 interface AquariumMutationInterface
 {
     /**

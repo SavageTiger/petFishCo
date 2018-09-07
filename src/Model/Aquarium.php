@@ -2,6 +2,8 @@
 
 namespace SvenH\PetFishCo\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Aquarium
  */
@@ -33,11 +35,16 @@ class Aquarium implements AquariumInterface
     protected $volume;
 
     /**
-     * {@inheritdoc}
+     * @var AquariumMutation[]
      */
-    public function setId(string $id)
+    protected $mutations;
+
+    /**
+     * Aquarium constructor
+     */
+    public function __construct()
     {
-        $this->id = $id;
+        $this->mutations = new ArrayCollection();
     }
 
     /**
@@ -115,8 +122,19 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function getFish(): float
+    public function getFishInventory(): array
     {
-        // TODO
+        $amount    = [];
+        $mutations = $this->mutations;
+
+        foreach ($mutations as $mutation) {
+            if (isset($amount[$mutation->getFish()->getId()]) === false) {
+                $amount[$mutation->getFish()->getId()] = 0;
+            }
+
+            $amount[$mutation->getFish()->getId()] += $mutation->getAmount();
+        }
+
+        return $amount;
     }
 }
