@@ -3,13 +3,13 @@
 namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SvenH\PetFishCo\Model\Picture as BasePicture;
+use SvenH\PetFishCo\Model\Property as BaseProperty;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="picture")
+ * @ORM\Table(name="property")
  */
-class Picture extends BasePicture
+class Property extends BaseProperty
 {
     /**
      * @ORM\Id
@@ -19,20 +19,20 @@ class Picture extends BasePicture
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=64)
+     * @ORM\Column(type="string", nullable=false)
      */
-    protected $filename;
+    protected $value;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=64)
+     * @ORM\Column(type="string", nullable=false)
      */
-    protected $binary;
+    protected $type;
 
     /**
      * @return string
      */
     public function __toString(): string
     {
-        return (string) $this->filename;
+        return (string) $this->value;
     }
 }

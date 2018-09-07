@@ -10,9 +10,9 @@ interface PictureInterface
     /**
      * Get the id
      *
-     * @return string
+     * @return int
      */
-    public function getId(): string;
+    public function getId(): int;
 
     /**
      * Get origin filename

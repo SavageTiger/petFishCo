@@ -8,7 +8,7 @@ namespace SvenH\PetFishCo\Model;
 class Picture implements PictureInterface
 {
     /**
-     * @var string
+     * @var int
      */
     protected $id;
 
@@ -35,7 +35,7 @@ class Picture implements PictureInterface
     /**
      * {@inheritdoc}
      */
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
     }

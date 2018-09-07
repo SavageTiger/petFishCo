@@ -4,8 +4,6 @@ namespace SvenH\PetFishCo\Model;
 
 class PropertyValue implements PropertyValueInterface
 {
-    protected const TYPES = [0 => 'glass', 1 => 'shape', 2 => 'family'];
-
     /**
      * @var integer
      */
@@ -17,9 +15,9 @@ class PropertyValue implements PropertyValueInterface
     protected $value;
 
     /**
-     * @var int
+     * @var PropertyInterface
      */
-    protected $type;
+    protected $property;
 
     /**
      * {@inheritdoc}

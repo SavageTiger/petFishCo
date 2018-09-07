@@ -16,7 +16,7 @@ class PetFishCoExtension extends Extension
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $serviceFiles = ['orm'];
+        $serviceFiles = ['orm', 'manager'];
 
         foreach ($serviceFiles as $basename) {
             $loader->load(sprintf('%s.xml', $basename));

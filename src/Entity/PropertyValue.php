@@ -19,14 +19,14 @@ class PropertyValue extends BasePropertyValue
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string")
      */
     protected $value;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Property")
      */
-    protected $type;
+    protected $property;
 
     /**
      * @return string

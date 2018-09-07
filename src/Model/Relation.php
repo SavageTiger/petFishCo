@@ -8,7 +8,7 @@ namespace SvenH\PetFishCo\Model;
 class Relation implements RelationInterface
 {
     /**
-     * @var string
+     * @var int
      */
     protected $id;
 
@@ -41,14 +41,6 @@ class Relation implements RelationInterface
     /**
      * {@inheritdoc}
      */
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFish(): FishInterface
     {
         return $this->fish;
@@ -66,7 +58,7 @@ class Relation implements RelationInterface
      * {@inheritdoc}
      */
     public function getTimestamp(): \DateTime
-        {
+    {
         return $this->timestamp;
     }
 }
