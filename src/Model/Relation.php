@@ -18,7 +18,7 @@ class Relation implements RelationInterface
     protected $fish;
 
     /**
-     * @var FishInterface
+     * @var AquariumInterface|null
      */
     protected $aquarium;
 

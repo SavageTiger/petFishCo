@@ -36,44 +36,44 @@ interface AquariumInterface
     public function getName(): string;
 
     /**
-     * Set the shape of this aquarium
+     * Set the shape
      *
-     * @param ShapeInterface $shape
+     * @param PropertyValueInterface $shape
      */
-    public function setShape(ShapeInterface $shape);
+    public function setShape(PropertyValueInterface $shape);
 
     /**
-     * Get the shape of this aquarium
+     * Get the shape
      *
-     * @return ShapeInterface
+     * @return PropertyValueInterface
      */
-    public function getShape(): ShapeInterface;
+    public function getShape(): PropertyValueInterface;
 
     /**
-     * Set glass type
+     * Set the glass type
      *
-     * @param GlassInterface $name
+     * @param PropertyValueInterface $glassType
      */
-    public function setName(GlassInterface $name);
+    public function setGlassType(PropertyValueInterface $glassType);
 
     /**
      * Get glass type
      *
-     * @return GlassInterface
+     * @return PropertyValueInterface
      */
-    public function getName(): GlassInterface;
+    public function getGlassType(): PropertyValueInterface;
 
     /**
-     * The amount of water in liters
+     * Set the volume of the aquarium in liters
      *
-     * @param double $name
+     * @param float $volume
      */
-    public function setName(double $name);
+    public function setVolume(float $volume);
 
-    /**
-     * Get the amount of water in liters
-     *
-     * @return double
-     */
-    public function getName(): double;
+     /**
+      * Get the volume of the aquarium in liters
+      *
+      * @return float
+      */
+     public function getVolume(): float;
 }

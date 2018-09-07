@@ -3,7 +3,7 @@
 namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SvenH\PetFishCo\Entity\Model\Fish as BaseFish;
+use SvenH\PetFishCo\Model\Fish as BaseFish;
 
 /**
  * @ORM\Entity
@@ -28,7 +28,7 @@ class Fish extends BaseFish
     protected $latinName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Family")
+     * @ORM\ManyToOne(targetEntity="PropertyValue")
      * @ORM\JoinColumn(name="family_id", referencedColumnName="id")
      */
     protected $family;
@@ -44,8 +44,8 @@ class Fish extends BaseFish
     protected $fins;
 
     /**
-     * @OneToOne(targetEntity="Picture")
-     * @JoinColumn(name="picture_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Picture")
+     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
      */
     protected $picture;
 

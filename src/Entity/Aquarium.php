@@ -3,7 +3,7 @@
 namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SvenH\PetFishCo\Entity\Model\Aquarium as BaseAquarium;
+use SvenH\PetFishCo\Model\Aquarium as BaseAquarium;
 
 /**
  * @ORM\Entity
@@ -23,17 +23,17 @@ class Aquarium extends BaseAquarium
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Shape")
+     * @ORM\ManyToOne(targetEntity="PropertyValue")
      */
     protected $shape;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Glass")
+     * @ORM\ManyToOne(targetEntity="PropertyValue")
      */
     protected $glassType;
 
     /**
-     * @ORM\Column(type="double", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     protected $volume;
 

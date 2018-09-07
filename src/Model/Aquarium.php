@@ -18,12 +18,12 @@ class Aquarium implements AquariumInterface
     protected $description;
 
     /**
-     * @var ShapeInterface
+     * @var PropertyValueInterface
      */
     protected $shape;
 
     /**
-     * @var GlassInterface
+     * @var PropertyValueInterface
      */
     protected $glassType;
 
@@ -67,7 +67,7 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function setShape(ShapeInterface $shape)
+    public function setShape(PropertyValueInterface $shape)
     {
         $this->shape = $shape;
     }
@@ -75,7 +75,7 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function getShape(): ShapeInterface
+    public function getShape(): PropertyValueInterface
     {
         return $this->shape;
     }
@@ -83,15 +83,15 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function setName(GlassInterface $name)
+    public function setGlassType(PropertyValueInterface $glassType)
     {
-        $this->glassType = $name;
+        $this->glassType = $glassType;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName(): GlassInterface
+    public function getGlassType(): PropertyValueInterface
     {
         return $this->glassType;
     }
@@ -99,15 +99,15 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function setName(double $name)
+    public function setVolume(float $volume)
     {
-        $this->volume = $name;
+        $this->volume = $volume;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName(): double
+    public function getVolume(): float
     {
         return $this->volume;
     }

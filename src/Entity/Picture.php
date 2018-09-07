@@ -3,7 +3,7 @@
 namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SvenH\PetFishCo\Entity\Model\Picture as BasePicture;
+use SvenH\PetFishCo\Model\Picture as BasePicture;
 
 /**
  * @ORM\Entity

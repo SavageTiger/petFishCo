@@ -3,7 +3,7 @@
 namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use SvenH\PetFishCo\Entity\Model\Relation as BaseRelation;
+use SvenH\PetFishCo\Model\Relation as BaseRelation;
 
 /**
  * @ORM\Entity
@@ -12,10 +12,10 @@ use SvenH\PetFishCo\Entity\Model\Relation as BaseRelation;
 class Relation extends BaseRelation
 {
     /**
-    * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue(strategy="AUTO")
-    */
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
 
     /**
@@ -24,7 +24,8 @@ class Relation extends BaseRelation
     protected $fish;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Aquarium", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Aquarium")
+     * @ORM\JoinColumn(name="aquarium_id", referencedColumnName="id", nullable=true)
      */
     protected $aquarium;
 

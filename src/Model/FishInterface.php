@@ -52,16 +52,16 @@ interface FishInterface
     /**
      * Set fish family
      *
-     * @param FamilyInterface $family
+     * @param PropertyValueInterface $family
      */
-    public function setFamily(FamilyInterface $family);
+    public function setFamily(PropertyValueInterface $family);
 
     /**
      * Get fish family
      *
-     * @return FamilyInterface
+     * @return PropertyValueInterface
      */
-    public function getFamily(): FamilyInterface;
+    public function getFamily(): PropertyValueInterface;
 
     /**
      * Set the primary color of the fish in hexadecimal notation
@@ -89,7 +89,7 @@ interface FishInterface
      *
      * @return integer
      */
-    public function getAmount(): integer;
+    public function getAmount(): int;
 
     /**
      * Set a picture of this fish
