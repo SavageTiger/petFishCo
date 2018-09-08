@@ -6,9 +6,11 @@ app.controller('headerCtrl', ['$scope', function ($scope) {
     /**
      * Item click event
      *
-     * @param href
+     * @param {string} href
+     * @param {string} title
      */
-    $scope.click = function (href) {
-        $scope.$parent.viewTpl = './partial/'  + href + '.tpl.html';
+    $scope.click = function (href, title) {
+        $scope.$parent.viewTitle = title;
+        $scope.$parent.viewTpl   = './partial/'  + href + '.tpl.html';
     }
 }]);

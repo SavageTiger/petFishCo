@@ -8,7 +8,7 @@ app.factory('FishCollection', ['$http', 'Fish', function ($http, fish) {
      * @param {method} callback
      */
     fishCollection.load = function (callback) {
-        $http.get('api.php/list/fish').then(function (data) {
+        $http.get('api.php/entity/list/fish').then(function (data) {
             var fishModels = [];
 
             for (var i in data.data) {
@@ -16,7 +16,7 @@ app.factory('FishCollection', ['$http', 'Fish', function ($http, fish) {
                     new fish(
                         data.data[i].id,
                         data.data[i].name,
-                        data.data[i].family.value,
+                        data.data[i].familyName,
                     )
                 );
             }

@@ -65,7 +65,6 @@ class PropertyManager
         return $property;
     }
 
-
     /**
      * Get a table of available identifier codes for
      * property types
@@ -77,6 +76,18 @@ class PropertyManager
     public function getAvailableTypes(): array
     {
         return self::PROPERTY_TYPES;
+    }
+
+    /**
+     * Get a list of properties existing for a certain type
+     *
+     * @param int $typeId
+     *
+     * @return PropertyInterface[]
+     */
+    public function getAllProperties(int $typeId): array
+    {
+        return $this->em->getRepository(Property::class)->findBy([ 'type' =>  $typeId ]);
     }
 
     /**

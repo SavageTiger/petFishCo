@@ -15,20 +15,33 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', function ($scope, fishCo
     $scope.shouldRenderHeader = function (fish) {
         var shouldRender = false;
 
-        if (fish.family !== $scope.lastHeader) {
+        if (fish.familyName !== $scope.lastHeader) {
             shouldRender = true;
         }
 
-        $scope.lastHeader = fish.family;
+        $scope.lastHeader = fish.familyName;
 
         return shouldRender;
     };
 
+    /**
+     * Load a selected fish
+     *
+     * @param {object} fish
+     */
     $scope.selectFish = function (fish) {
-        fish.load(function() {
-            $scope.fish = fish;
+        fish.loadClone(function(model) {
+            $scope.viewModel = model;
+            $scope.isDirty  = undefined;
         });
     };
+
+    /**
+     * Detect a model change
+     */
+    $scope.$watch('viewModel', function() {
+        $scope.isDirty = ($scope.isDirty !== undefined);
+    }, true);
 
     /**
      * Query the api for fishes

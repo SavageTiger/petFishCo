@@ -2,14 +2,60 @@
 <div ng-controller="fishCtrl">
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <div ng-repeat="fish in fishes|orderBy:family" class="link" ng-class-even="'even'" ng-class-odd="'odd'">
                 <div ng-if="shouldRenderHeader(fish)">
-                    <h3>{{ fish.family }}</h3>
+                    <h3>{{ fish.familyName }}</h3>
                 </div>
 
                 <a href="#" ng-click="selectFish(fish)">{{ fish.name }}</a>
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    <table class="table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Name</th>
+                            <td><input type="text" class="form-control" ng-model="viewModel.name" /></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Latin name</th>
+                            <td><input type="text" class="form-control" ng-model="viewModel.latinName" /></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Family</th>
+                            <td><ng-property-selector ng-model="viewModel.familyName" property-type="Fish Family" /></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Color</th>
+                            <td><color-picker ng-model="viewModel.color"></color-picker></td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Fins</th>
+                            <td><input type="number" class="form-control" ng-model="viewModel.fins" /></td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary" ng-disabled="!isDirty"><i class="fas fa-save"></i>&nbsp;Save</button>
+                    <button class="btn float-right"><i class="fas fa-images"></i>&nbsp;Change image</button>
+
+                </div>
+
+                <div class="col-md-4">
+                    <img class="fish-picture" width="90%" data-ng-src="data:image/png;base64,{{viewModel.picture.binary}}" />
+                </div>
             </div>
 
         </div>

@@ -1,4 +1,8 @@
 
-var app = angular.module('petFishCo', []);
+var app = angular.module('petFishCo', ['color.picker', 'ui-notification']);
 
-app.controller('mainCtrl', function () {});
+app.controller('mainCtrl', ['Notification', function (Notification) {
+
+    Notification.success('Welcome');
+
+}]);

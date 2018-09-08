@@ -57,6 +57,13 @@ interface FishInterface
     public function getFamily(): PropertyInterface;
 
     /**
+     * Get fish family name from the property object
+     *
+     * @return string
+     */
+    public function getFamilyName(): string;
+
+    /**
      * Set the primary color of the fish in hexadecimal notation
      *
      * @param string $color
@@ -75,14 +82,14 @@ interface FishInterface
      *
      * @param integer $amount
      */
-    public function setAmount(int $amount);
+    public function setFins(int $amount);
 
     /**
      * Get the amount of fins
      *
      * @return integer
      */
-    public function getAmount(): int;
+    public function getFins(): int;
 
     /**
      * Set a picture of this fish

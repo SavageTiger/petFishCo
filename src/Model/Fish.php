@@ -100,12 +100,20 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getFamily(): PropertyInterface
     {
         return $this->family;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @Groups({"list", "detail"})
+     */
+    public function getFamilyName(): string
+    {
+        return $this->family->getValue();
     }
 
     /**
@@ -129,7 +137,7 @@ class Fish implements FishInterface
     /**
      * {@inheritdoc}
      */
-    public function setAmount(int $amount)
+    public function setFins(int $amount)
     {
         $this->fins = $amount;
     }
@@ -139,7 +147,7 @@ class Fish implements FishInterface
      *
      * @Groups({"detail"})
      */
-    public function getAmount(): int
+    public function getFins(): int
     {
         return $this->fins;
     }

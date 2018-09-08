@@ -5,12 +5,12 @@ namespace SvenH\PetFishCo\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ApiController extends AbstractController
+class ApiEntityController extends AbstractController
 {
     /**
-     * @Route("/load/{objectType}/{guid}", name="api_load_entry")
+     * @Route("/entity/load/{objectType}/{guid}", name="api_load_entity")
      */
-    public function apiLoadAction(string $objectType, string $guid)
+    public function apiEntityLoadAction(string $objectType, string $guid)
     {
         $manager = $this->getManager($objectType);
         $entity  = $manager->findOneById($guid);
@@ -26,9 +26,9 @@ class ApiController extends AbstractController
     }
 
     /**
-     * @Route("/list/{objectType}", name="api_list_entries")
+     * @Route("/entity/list/{objectType}", name="api_list_entities")
      */
-    public function apiListAction(string $objectType)
+    public function apiEntityListAction(string $objectType)
     {
         $manager  = $this->getManager($objectType);
         $entities = $manager->findAll();
