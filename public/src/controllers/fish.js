@@ -1,5 +1,5 @@
 
-app.controller('fishCtrl', ['$scope', 'FishCollection', function ($scope, fishCollection) {
+app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope, fishCollection, fish) {
 
     $scope.lastHeader = null;
     $scope.fishes     = [];
@@ -32,16 +32,27 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', function ($scope, fishCo
     $scope.selectFish = function (fish) {
         fish.loadClone(function(model) {
             $scope.viewModel = model;
-            $scope.isDirty  = undefined;
         });
     };
 
     /**
-     * Detect a model change
+     * Image change button press event
      */
-    $scope.$watch('viewModel', function() {
-        $scope.isDirty = ($scope.isDirty !== undefined);
-    }, true);
+    $scope.changeImage = function () {
+        // Propagate action to the ngImage directive
+        $scope.$broadcast('imagePicker');
+    };
+
+    $scope.createNew = function () {
+        $scope.viewModel = new fish(null);
+    };
+
+    /**
+     * Save model to the back-end
+     */
+    $scope.saveFish = function() {
+        $scope.viewModel.save();
+    };
 
     /**
      * Query the api for fishes

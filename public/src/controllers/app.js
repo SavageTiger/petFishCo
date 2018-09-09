@@ -1,8 +1,12 @@
 
 var app = angular.module('petFishCo', ['color.picker', 'ui-notification']);
 
-app.controller('mainCtrl', ['Notification', function (Notification) {
+app.controller('mainCtrl', ['$scope', 'Notification', function ($scope, notification) {
 
-    Notification.success('Welcome');
+    $scope.colorPickerSettings = {
+        format: 'hex'
+    };
+
+    notification.success('Welcome');
 
 }]);

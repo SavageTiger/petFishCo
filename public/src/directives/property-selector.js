@@ -1,5 +1,5 @@
 
-app.directive('ngPropertySelector', ['$http', function($http) {
+app.directive('ngPropertySelector', ['Api', function(api) {
     return {
         require: 'ngModel',
         restrict: 'E',
@@ -7,7 +7,7 @@ app.directive('ngPropertySelector', ['$http', function($http) {
 
         link: function(scope, element, attrs, ngModel) {
 
-            $http.get('api.php/properties/list/' + attrs.propertyType).then(function (data) {
+            api.getProperties(attrs.propertyType).then(function (data) {
                 scope.properties = data.data;
             });
 

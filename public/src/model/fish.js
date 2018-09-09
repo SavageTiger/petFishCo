@@ -1,5 +1,5 @@
 
-app.factory('Fish', ['$http', function ($http) {
+app.factory('Fish', ['Api', function (api) {
 
     function Fish(id, name, family) {
         this.id         = id;
@@ -14,13 +14,22 @@ app.factory('Fish', ['$http', function ($http) {
     };
 
     Fish.prototype.loadClone = function(callback) {
-        $http.get('api.php/entity/load/fish/' + this.id).then(function (data) {
+        api.loadEntity('fish', this.id).then(function (data) {
             var fish = new Fish();
 
             fish.unserialize(data.data);
 
             callback(fish);
         });
+    };
+
+    Fish.prototype.save = function () {
+        if (this.id) {
+
+        } else {
+        }
+
+        api.saveEntity(this);
     };
 
     return Fish;

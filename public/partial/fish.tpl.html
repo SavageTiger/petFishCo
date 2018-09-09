@@ -1,5 +1,11 @@
 
-<div ng-controller="fishCtrl">
+<div ng-controller="fishCtrl" class="row-correction">
+
+    <div class="row">
+        <div class="col-md-12">
+            <button ng-click="createNew()" class="btn btn-success btn-new float-right"><i class="fas fa-plus-circle"></i>&nbsp;Create new</button>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-md-4">
@@ -16,7 +22,7 @@
 
         <div class="col-md-8">
 
-            <div class="row">
+            <div class="row" ng-if="viewModel">
                 <div class="col-md-8">
 
                     <table class="table">
@@ -38,7 +44,7 @@
 
                         <tr>
                             <th scope="row">Color</th>
-                            <td><color-picker ng-model="viewModel.color"></color-picker></td>
+                            <td><color-picker options="colorPickerSettings" ng-model="viewModel.color"></color-picker></td>
                         </tr>
 
                         <tr>
@@ -48,13 +54,13 @@
                         </tbody>
                     </table>
 
-                    <button class="btn btn-primary" ng-disabled="!isDirty"><i class="fas fa-save"></i>&nbsp;Save</button>
-                    <button class="btn float-right"><i class="fas fa-images"></i>&nbsp;Change image</button>
+                    <button class="btn btn-primary" ng-click="saveFish()"><i class="fas fa-save"></i>&nbsp;Save</button>
+                    <button class="btn float-right" ng-click="changeImage()"><i class="fas fa-images"></i>&nbsp;Change image</button>
 
                 </div>
 
                 <div class="col-md-4">
-                    <img class="fish-picture" width="90%" data-ng-src="data:image/png;base64,{{viewModel.picture.binary}}" />
+                    <ng-image ng-model="viewModel.picture" />
                 </div>
             </div>
 

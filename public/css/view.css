@@ -39,11 +39,21 @@
 .fish-picture
 {
     display: block;
+    width: 100%;
     border-radius: 25px;
     margin: 0 auto;
-    padding: 5px;
 }
 
 .table {
     background-color: rgba(255, 255, 255, 0.8);
+}
+
+.row-correction > .row {
+    position: relative;
+    top: -35px;
+}
+
+.row-correction > .row:first-child {
+    position: relative;
+    top: -55px;
 }

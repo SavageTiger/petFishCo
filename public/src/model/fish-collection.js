@@ -1,5 +1,5 @@
 
-app.factory('FishCollection', ['$http', 'Fish', function ($http, fish) {
+app.factory('FishCollection', ['Api', 'Fish', function (api, fish) {
     var fishCollection = {};
 
     /**
@@ -8,7 +8,7 @@ app.factory('FishCollection', ['$http', 'Fish', function ($http, fish) {
      * @param {method} callback
      */
     fishCollection.load = function (callback) {
-        $http.get('api.php/entity/list/fish').then(function (data) {
+        api.loadEntityList('fish').then(function (data) {
             var fishModels = [];
 
             for (var i in data.data) {
