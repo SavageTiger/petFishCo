@@ -8,11 +8,13 @@
 
         <service id="petfishco.manager.aquarium" class="SvenH\PetFishCo\Managers\AquariumManager" public="true">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="validator" />
             <argument type="service" id="petfishco.manager.property" />
         </service>
 
         <service id="petfishco.manager.fish" class="SvenH\PetFishCo\Managers\FishManager" public="true">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="validator" />
             <argument type="service" id="petfishco.manager.property" />
             <argument type="service" id="petfishco.manager.picture" />
         </service>

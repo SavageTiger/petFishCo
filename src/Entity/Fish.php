@@ -5,6 +5,7 @@ namespace SvenH\PetFishCo\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use SvenH\PetFishCo\Model\Fish as BaseFish;
 use JMS\Serializer\Annotation as Serializer;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -22,6 +23,8 @@ class Fish extends BaseFish
     protected $id;
 
     /**
+     * @Assert\NotBlank(message="Please provide a name");
+     *
      * @ORM\Column(type="string", nullable=false, length=64)
      *
      * @Serializer\Groups({"list", "detail"})
@@ -29,7 +32,7 @@ class Fish extends BaseFish
     protected $name;
 
     /**
-     * @ORM\Column(type="string", nullable=false, length=64)
+     * @ORM\Column(type="string", nullable=true, length=64)
      *
      * @Serializer\Groups({"detail"})
      */
@@ -47,6 +50,9 @@ class Fish extends BaseFish
     /**
      * @ORM\Column(type="string", nullable=false, length=8)
      *
+     * @Assert\NotBlank(message="Please provide a valid color (e.g. FFFFFF)");
+     * @Assert\Regex(pattern="/[a-zA-Z0-9]{6}/", message="Please provide a valid color (e.g. FFFFFF)");
+     *
      * @Serializer\Groups({"list", "detail"})
      */
     protected $color;
@@ -59,7 +65,7 @@ class Fish extends BaseFish
     protected $fins;
 
     /**
-     * @ORM\OneToOne(targetEntity="Picture", cascade={"PERSIST", "REMOVE"})
+     * @ORM\OneToOne(targetEntity="Picture", cascade={"PERSIST", "REMOVE"}, orphanRemoval=true)
      * @ORM\JoinColumn(name="picture_id", referencedColumnName="id", nullable=true)
      *
      * @Serializer\Groups({"detail"})

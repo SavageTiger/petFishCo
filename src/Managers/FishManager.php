@@ -7,6 +7,7 @@ use SvenH\PetFishCo\Entity\Fish;
 use SvenH\PetFishCo\Model\FishInterface;
 use SvenH\PetFishCo\Model\PropertyInterface;
 use SvenH\PetFishCo\ORM\AbstractORMManager;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Manager for fish entity
@@ -25,12 +26,14 @@ class FishManager extends AbstractORMManager
 
     /**
      * @param EntityManagerInterface $em
+     * @param ValidatorInterface     $validator
      * @param PropertyManager        $propertyManager
      * @param PictureManager         $pictureManager
      */
-    public function __construct(EntityManagerInterface $em, PropertyManager $propertyManager, PictureManager $pictureManager)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, PropertyManager $propertyManager, PictureManager $pictureManager)
     {
         $this->em              = $em;
+        $this->validator       = $validator;
         $this->propertyManager = $propertyManager;
         $this->pictureManager  = $pictureManager;
         $this->className       = Fish::class;

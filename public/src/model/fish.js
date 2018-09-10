@@ -26,7 +26,7 @@ app.factory('Fish', ['Api', function (api) {
     };
 
     Fish.prototype.save = function () {
-        api.saveEntity(this);
+        return api.saveEntity(this);
     };
 
     return Fish;

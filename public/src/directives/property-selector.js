@@ -15,8 +15,8 @@ app.directive('ngPropertySelector', ['Api', function(api) {
                 scope.property = ngModel.$viewValue;
             };
 
-            scope.$watch('property', function (oldVal, newVal) {
-                ngModel.$setViewValue(newVal);
+            scope.$watch('property', function (value) {
+                ngModel.$setViewValue(value);
             })
 
         },

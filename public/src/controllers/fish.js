@@ -51,14 +51,22 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
      * Save model to the back-end
      */
     $scope.saveFish = function() {
-        $scope.viewModel.save();
+        $scope.viewModel.save().then(function () {
+            $scope.loadFishes();
+        });
+
     };
 
     /**
      * Query the api for fishes
      */
-    fishCollection.load(function (fishCollection) {
-        $scope.fishes = fishCollection;
-    });
+    $scope.loadFishes = function () {
+        fishCollection.load(function (fishCollection) {
+            $scope.fishes = fishCollection;
+        });
+    };
+
+    // Bootstrap view
+    $scope.loadFishes();
 
 }]);

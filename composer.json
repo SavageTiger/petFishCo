@@ -15,6 +15,7 @@
         "symfony/framework-bundle": "*",
         "symfony/orm-pack": "^1.0",
         "symfony/property-access": "*",
+        "symfony/validator": "*",
         "symfony/yaml": "*"
     },
     "require-dev": {

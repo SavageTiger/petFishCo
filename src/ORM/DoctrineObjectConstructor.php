@@ -31,20 +31,17 @@ class DoctrineObjectConstructor extends BaseDoctrineObjectContructor
      */
     public function construct(VisitorInterface $visitor, ClassMetadata $metadata, $data, array $type, DeserializationContext $context)
     {
-        $object = parent::construct($visitor, $metadata, $data, $type, $context);
-
         if ($this->request->getMethod() === 'PATCH') {
+            $object = parent::construct($visitor, $metadata, $data, $type, $context);
+
             if ($object === null) {
                 throw new \Exception('Unable to load entity');
             }
+
         }
 
         if ($this->request->getMethod() === 'POST') {
-            if ($object->getId() !== null) {
-                throw new \Exception('Logic exception: Unable to create new entity that already contains an id');
-            }
-
-            return new $type['name'];
+            $object = new $type['name'];
         }
 
         return $object;

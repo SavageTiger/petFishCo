@@ -3,6 +3,8 @@
 namespace SvenH\PetFishCo\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\ConstraintViolation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 abstract class AbstractORMManager
 {
@@ -10,6 +12,11 @@ abstract class AbstractORMManager
      * @var EntityManagerInterface
      */
     protected $em;
+
+    /**
+     * @var ValidatorInterface
+     */
+    protected $validator;
 
     protected $className = null;
 
@@ -54,6 +61,16 @@ abstract class AbstractORMManager
      */
     public function update($entity)
     {
+        $invalid = $this->validator->validate($entity);
+
+        if (count($invalid) > 0) {
+            /** @var ConstraintViolation $violation */
+            $violation = current($invalid);
+            $violation = $violation[0];
+
+            throw new \Exception($violation->getMessage());
+        }
+
         $this->em->persist($entity);
         $this->em->flush();
     }

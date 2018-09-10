@@ -9,6 +9,7 @@ use SvenH\PetFishCo\Model\AquariumInterface;
 use SvenH\PetFishCo\Model\FishInterface;
 use SvenH\PetFishCo\Model\PropertyInterface;
 use SvenH\PetFishCo\ORM\AbstractORMManager;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Manager for aquarium entity
@@ -22,11 +23,13 @@ class AquariumManager extends AbstractORMManager
 
     /**
      * @param EntityManagerInterface $em
+     * @param ValidatorInterface     $validator
      * @param PropertyManager        $propertyManager
      */
-    public function __construct(EntityManagerInterface $em, PropertyManager $propertyManager)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, PropertyManager $propertyManager)
     {
         $this->em              = $em;
+        $this->validator       = $validator;
         $this->propertyManager = $propertyManager;
         $this->className       = Aquarium::class;
     }
