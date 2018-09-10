@@ -1,0 +1,60 @@
+
+<div ng-controller="aquariaCtrl" class="row-correction">
+
+    <div class="row">
+        <div class="col-md-12">
+            <button ng-click="createNew()" class="btn btn-success btn-new float-right"><i class="fas fa-plus-circle"></i>&nbsp;Create new</button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="list-group">
+
+                <a ng-repeat="aquarium in aquaria" ng-click="selectAquarium(aquarium)" class="view-list-item" href="#">
+                    {{ aquarium.description }}
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+
+            <div ng-if="viewModel">
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row">Brief description</th>
+                        <td><input type="text" class="form-control" ng-model="viewModel.description" /></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Shape</th>
+                        <td><ng-property-selector ng-model="viewModel.shape" property-type="Shape" /></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Glass type</th>
+                        <td><ng-property-selector ng-model="viewModel.glass_type" property-type="Glass" /></td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">Volume</th>
+                        <td>
+                            <ng-volume ng-model="viewModel.volume" volume="viewModel.volume" volume-unit="viewModel.volume_unit" />
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+                <button class="btn btn-primary" ng-click="saveAquarium()"><i class="fas fa-save"></i>&nbsp;Save</button>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

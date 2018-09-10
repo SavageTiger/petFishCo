@@ -2,6 +2,7 @@
 app.directive('ngPropertySelector', ['Api', function(api) {
     return {
         require: 'ngModel',
+        scope: true,
         restrict: 'E',
         transclude: true,
 

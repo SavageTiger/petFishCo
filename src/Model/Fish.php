@@ -133,7 +133,7 @@ class Fish implements FishInterface
     /**
      * {@inheritdoc}
      */
-    public function getFins(): int
+    public function getFins(): ?int
     {
         return $this->fins;
     }

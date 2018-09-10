@@ -18,15 +18,19 @@
         <script src="src/controllers/app.js"></script>
         <script src="src/controllers/header.js"></script>
         <script src="src/controllers/fish.js"></script>
+        <script src="src/controllers/aquaria.js"></script>
         <script src="src/service/api.js"></script>
         <script src="src/directives/image.js"></script>
         <script src="src/directives/property-selector.js"></script>
-        <script src="src/model/fish.js"></script>
-        <script src="src/model/fish-collection.js"></script>
+        <script src="src/directives/volume.js"></script>
+        <script src="src/model/model.js"></script>
+        <script src="src/model/collection.js"></script>
 
         <link rel="stylesheet" href="./css/app.css" />
         <link rel="stylesheet" href="./css/header.css" />
         <link rel="stylesheet" href="./css/view.css" />
+
+        <title>StockApp - Pet Fish Co.</title>
     </head>
     <body ng-app="petFishCo">
         <div ng-controller="mainCtrl">
@@ -35,7 +39,7 @@
                 <div ng-include="headerTpl"></div>
             </div>
 
-            <div class="container bg-light">
+            <div class="container bg-light" ng-if="viewTitle">
                 <div class="view-title">{{ viewTitle }}</div>
                 <div ng-include="viewTpl"></div>
             </div>

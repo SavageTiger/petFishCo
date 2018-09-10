@@ -42,11 +42,13 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
             });
         },
 
-        saveEntity: function (entity)
+        saveEntity: function (typeName, entity)
         {
             return $q(function (resolve, reject) {
-                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/fish', data: JSON.stringify(entity) }).then(function (data) {
-                    if (data.data.message) {
+                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: JSON.stringify(entity) }).then(function (data) {
+                    if (data.data.id) {
+                        entity.id = data.data.id;
+
                         notification.success('Success:<br /><b>' + data.data.message + '</b>')
                     }
 

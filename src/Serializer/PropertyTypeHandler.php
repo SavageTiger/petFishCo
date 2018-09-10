@@ -26,7 +26,7 @@ class PropertyTypeHandler
 
     /**
      * @param JsonSerializationVisitor $visitor
-     * @param PropertyInterface        $valur
+     * @param PropertyInterface        $value
      * @param array                    $type
      *
      * @return string

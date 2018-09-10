@@ -42,7 +42,7 @@ class MutationFixtures extends AbstractFixture
         ];
 
         foreach ($mutations as $aquariumDesc => $fishMutations) {
-            $aquarium = $aquariumManager->findOneByDescription($aquariumDesc);
+            $aquarium = $aquariumManager->findOneByCriteria([ 'description' => $aquariumDesc ]);
 
             foreach ($fishMutations as $mutation) {
                 $fishName = array_keys($mutation)[0];

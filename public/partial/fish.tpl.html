@@ -10,12 +10,17 @@
     <div class="row">
         <div class="col-md-4">
 
-            <div ng-repeat="fish in fishes|orderBy:family" class="link" ng-class-even="'even'" ng-class-odd="'odd'">
-                <div ng-if="shouldRenderHeader(fish)">
-                    <h3>{{ fish.family }}</h3>
-                </div>
+            <div class="list-group">
+                <div ng-repeat="fish in fishes|orderBy:'name'|orderBy:'family'">
 
-                <a href="#" ng-click="selectFish(fish)">{{ fish.name }}</a>
+                    <a href="#" class="view-list-item header" ng-if="shouldRenderHeader(fish)">
+                        {{ fish.family }}
+                    </a>
+
+                    <a href="#" class="view-list-item" ng-click="selectFish(fish)">
+                        {{ fish.name }}
+                    </a>
+                </div>
             </div>
 
         </div>

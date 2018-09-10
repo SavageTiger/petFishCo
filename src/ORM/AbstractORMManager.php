@@ -18,10 +18,13 @@ abstract class AbstractORMManager
      */
     protected $validator;
 
+    /**
+     * @var string|null
+     */
     protected $className = null;
 
     /**
-     * Find fish by id
+     * Find entity by id
      *
      * @param string $id
      *
@@ -33,7 +36,7 @@ abstract class AbstractORMManager
     }
 
     /**
-     * Find fish by its name
+     * Find entity by its name
      *
      * @param string $name
      *
@@ -41,11 +44,23 @@ abstract class AbstractORMManager
      */
     public function findOneByName(string $name)
     {
-        return $this->em->getRepository($this->className)->findOneBy([ 'name' => $name ]);
+        return $this->findOneByCriteria([ 'name' => $name ]);
     }
 
     /**
-     * Find all the fish
+     * Find entity by user defined criteria
+     *
+     * @param array $criteria
+     *
+     * @return null|object
+     */
+    public function findOneByCriteria(array $criteria)
+    {
+        return $this->em->getRepository($this->className)->findOneBy($criteria);
+    }
+
+    /**
+     * Find all the entities
      *
      * @return array
      */
@@ -58,6 +73,7 @@ abstract class AbstractORMManager
      * Update entity
      *
      * @param $entity
+     * @throws \Exception
      */
     public function update($entity)
     {

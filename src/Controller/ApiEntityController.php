@@ -53,6 +53,6 @@ class ApiEntityController extends AbstractController
 
         $manager->update($entity);
 
-        return new JsonResponse(['message' => 'Entity was successfully updated']);
+        return new JsonResponse([ 'id' => $entity->getId(), 'message' => ucfirst($objectType) . ' was successfully updated' ]);
     }
 }

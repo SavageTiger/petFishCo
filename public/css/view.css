@@ -12,24 +12,6 @@
     padding: 25px;
 }
 
-.container .link > a:hover {
-    text-decoration: none;
-    background-color: #fcfcfc;
-}
-
-
-.container .link > a {
-    padding: 2px;
-    color: black;
-    display: block;
-    width: 100%;
-}
-
-.container .link.even > a {
-    display: block;
-    width: 100%;
-}
-
 .view-title {
     font-weight: bold;
     font-size: 20px;
@@ -44,7 +26,34 @@
     margin: 0 auto;
 }
 
+.list-group {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.view-list-item.header {
+    text-align: center;
+    font-weight: bold;
+}
+
+.view-list-item:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.view-list-item {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid #e0e0e0;
+    display: block;
+    padding: 10px;
+    border-radius: 0;
+}
+
+
 .table {
+    border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.8);
 }
 

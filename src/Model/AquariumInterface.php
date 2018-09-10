@@ -57,18 +57,27 @@ interface AquariumInterface
     public function getGlassType(): PropertyInterface;
 
     /**
-     * Set the volume of the aquarium in liters
+     * Set the volume of the aquarium in the unit specified in the volumeUnit property
      *
      * @param float $volume
      */
     public function setVolume(float $volume);
 
+    /**
+     * Define the unit of the volume
+     *
+     * @param string $unit
+     */
+    public function setVolumeUnit(string $unit = 'liters');
+
      /**
       * Get the volume of the aquarium in liters
       *
+      * @param string $unit Get the volume in gallons or liters
+      *
       * @return float
       */
-     public function getVolume(): float;
+     public function getVolume(string $unit): float;
 
      /**
       * Get the amount of fish in this aquarium in the following format [ 'fish-uuid' => <count>, ... ]

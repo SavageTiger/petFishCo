@@ -1,5 +1,5 @@
 
-app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope, fishCollection, fish) {
+app.controller('fishCtrl', ['$scope', 'Collection', 'Model', function ($scope, Collection, Model) {
 
     $scope.lastHeader = null;
     $scope.fishes     = [];
@@ -8,7 +8,7 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
      * Render a header if the family
      * has changed in the iteration loop inside the view
      *
-     * @param {Fish} fish
+     * @param {Model} fish
      *
      * @returns {boolean}
      */
@@ -27,7 +27,7 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
     /**
      * Load a selected fish
      *
-     * @param {object} fish
+     * @param {Model} fish
      */
     $scope.selectFish = function (fish) {
         fish.loadClone(function(model) {
@@ -43,8 +43,11 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
         $scope.$broadcast('imagePicker');
     };
 
+    /**
+     * Create new event
+     */
     $scope.createNew = function () {
-        $scope.viewModel = new fish(null);
+        $scope.viewModel = new Model('fish');
     };
 
     /**
@@ -54,14 +57,13 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
         $scope.viewModel.save().then(function () {
             $scope.loadFishes();
         });
-
     };
 
     /**
      * Query the api for fishes
      */
     $scope.loadFishes = function () {
-        fishCollection.load(function (fishCollection) {
+        Collection.load('fish', function (fishCollection) {
             $scope.fishes = fishCollection;
         });
     };

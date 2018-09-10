@@ -87,9 +87,9 @@ interface FishInterface
     /**
      * Get the amount of fins
      *
-     * @return integer
+     * @return integer|null
      */
-    public function getFins(): int;
+    public function getFins(): ?int;
 
     /**
      * Set a picture of this fish

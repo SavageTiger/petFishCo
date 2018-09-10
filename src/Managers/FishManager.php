@@ -61,7 +61,7 @@ class FishManager extends AbstractORMManager
         $fish = new Fish();
         $fish->setName($name);
         $fish->setLatinName($latinName);
-        $fish->setAmount($finAmount);
+        $fish->setFins($finAmount);
         $fish->setColor($color);
 
         if (($family instanceof PropertyInterface) === false) {

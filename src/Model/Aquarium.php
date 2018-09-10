@@ -21,7 +21,7 @@ class Aquarium implements AquariumInterface
     protected $description;
 
     /**
-     * @var PropertyInteface
+     * @var PropertyInterface
      */
     protected $shape;
 
@@ -34,6 +34,11 @@ class Aquarium implements AquariumInterface
      * @var double
      */
     protected $volume;
+
+    /**
+     * @var string
+     */
+    protected $volumeUnit;
 
     /**
      * @var AquariumMutation[]
@@ -119,8 +124,31 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function getVolume(): float
+    public function setVolumeUnit(string $unit = 'liters')
     {
+        if ($unit !== 'liters' || $unit !== 'gallons') {
+            throw new \Exception('Invalid unit supplied, accepted units are "liters" and "gallons"');
+        }
+
+        $this->volumeUnit = $unit;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVolume(string $unit = 'liters'): float
+    {
+        if ($unit !== 'liters' || $unit !== 'gallons') {
+            throw new \Exception('Invalid unit requested, supported units are "liters" and "gallons"');
+        }
+
+        if ($this->volumeUnit === 'liters' && $unit === 'gallons') {
+            return ($this->volume / 3.7854);
+        } else if ($this->volumeUnit === 'gallons' && $unit === 'liters') {
+            return ($this->volume * 3.7854);
+        }
+
         return $this->volume;
     }
 

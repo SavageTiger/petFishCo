@@ -42,6 +42,8 @@ class Fish extends BaseFish
      * @ORM\ManyToOne(targetEntity="Property")
      * @ORM\JoinColumn(name="family_id", referencedColumnName="id", nullable=false)
      *
+     * @Assert\NotBlank(message="Family is required");
+     *
      * @Serializer\Type("property<Fish_Family>")
      * @Serializer\Groups({"list", "detail"})
      */
@@ -59,6 +61,9 @@ class Fish extends BaseFish
 
     /**
      * @ORM\Column(type="smallint", nullable=false, length=32)
+     *
+     * @Assert\NotBlank(message="Please provide the amount of fins");
+     * @Assert\Expression("this.getFins() > 0", message="A fish needs at-least one fin")
      *
      * @Serializer\Groups({"detail"})
      */
