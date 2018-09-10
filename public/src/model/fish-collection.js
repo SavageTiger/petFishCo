@@ -16,7 +16,7 @@ app.factory('FishCollection', ['Api', 'Fish', function (api, fish) {
                     new fish(
                         data.data[i].id,
                         data.data[i].name,
-                        data.data[i].familyName,
+                        data.data[i].family,
                     )
                 );
             }

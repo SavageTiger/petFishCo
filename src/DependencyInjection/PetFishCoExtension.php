@@ -5,6 +5,7 @@ namespace SvenH\PetFishCo\DependencyInjection;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class PetFishCoExtension extends Extension
@@ -14,12 +15,17 @@ class PetFishCoExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $xmlLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $ymlLoader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $serviceFiles = ['orm', 'manager', 'listener'];
+        $serviceFiles = ['orm.xml', 'manager.xml', 'listener.xml'];
 
-        foreach ($serviceFiles as $basename) {
-            $loader->load(sprintf('%s.xml', $basename));
+        foreach ($serviceFiles as $file) {
+            if (strpos($file, '.xml') !== false) {
+                $xmlLoader->load($file);
+            } else {
+                $ymlLoader->load($file);
+            }
         }
     }
 }

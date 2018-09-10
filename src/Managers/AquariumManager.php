@@ -8,6 +8,7 @@ use SvenH\PetFishCo\Entity\AquariumMutation;
 use SvenH\PetFishCo\Model\AquariumInterface;
 use SvenH\PetFishCo\Model\FishInterface;
 use SvenH\PetFishCo\Model\PropertyInterface;
+use SvenH\PetFishCo\ORM\AbstractORMManager;
 
 /**
  * Manager for aquarium entity

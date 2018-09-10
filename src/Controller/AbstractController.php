@@ -2,15 +2,10 @@
 
 namespace SvenH\PetFishCo\Controller;
 
-use Doctrine\Common\Annotations\AnnotationException;
-use Doctrine\Common\Annotations\AnnotationReader;
-use SvenH\PetFishCo\Managers\AbstractORMManager;
+use JMS\Serializer\DeserializationContext;
+use JMS\Serializer\SerializationContext;
+use SvenH\PetFishCo\ORM\AbstractORMManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 abstract class AbstractController extends Controller
 {
@@ -21,20 +16,35 @@ abstract class AbstractController extends Controller
      * @param mixed  $data
      *
      * @return array
-     *
-     * @throws AnnotationException
      */
     protected function serialize($context = 'list', $data): array
     {
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        $encoders    = [ new JsonEncoder() ];
-        $normalizers = [ new ObjectNormalizer($classMetadataFactory) ];
+        $serializer        = $this->get('jms_serializer');
+        $serializerContext = new SerializationContext();
+        $serializerContext->setGroups($context);
 
-        $serializer  = new Serializer($normalizers, $encoders);
-        $context     = ['groups' => [$context]];
+        $json = $serializer->serialize($data, 'json', $serializerContext);
 
-        return json_decode($serializer->serialize($data, 'json', $context));
+        return json_decode($json);
     }
+
+    /**
+     * Transform array into entity
+     *
+     * @param array  $data
+     * @param string $type
+     *
+     * @return mixed
+     */
+    protected function unserialize(array $data, string $type)
+    {
+        $serializer        = $this->get('jms_serializer');
+        $serializerContext = new DeserializationContext();
+
+        return $serializer->deserialize(
+            json_encode($data), $type, 'json', $serializerContext
+        );
+     }
 
     /**
      * Get object manager from the container

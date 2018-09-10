@@ -2,8 +2,6 @@
 
 namespace SvenH\PetFishCo\Model;
 
-use Symfony\Component\Serializer\Annotation\Groups;
-
 class Property implements PropertyInterface
 {
     /**
@@ -37,8 +35,6 @@ class Property implements PropertyInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getValue(): string
     {

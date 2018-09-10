@@ -15,11 +15,11 @@ app.controller('fishCtrl', ['$scope', 'FishCollection', 'Fish', function ($scope
     $scope.shouldRenderHeader = function (fish) {
         var shouldRender = false;
 
-        if (fish.familyName !== $scope.lastHeader) {
+        if (fish.family !== $scope.lastHeader) {
             shouldRender = true;
         }
 
-        $scope.lastHeader = fish.familyName;
+        $scope.lastHeader = fish.family;
 
         return shouldRender;
     };

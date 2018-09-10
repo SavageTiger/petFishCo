@@ -6,6 +6,9 @@
 parameters:
 
 services:
+    jms_serializer.object_constructor:
+        alias: petfishco.orm.doctrine_object_constructor
+
     # default configuration for services in *this* file
     _defaults:
         autowire: false      # Automatically injects dependencies in your services.

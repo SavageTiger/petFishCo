@@ -1,7 +1,7 @@
 
 app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notification) {
 
-    var errorHandler = function (err) {
+    let errorHandler = function (err) {
         notification.error('Error: <b><br />' + err.data.message + '</b>');
     };
 
@@ -45,7 +45,11 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
         saveEntity: function (entity)
         {
             return $q(function (resolve, reject) {
-                $http({ method: 'POST', url: 'api.php/entity/fish', data: JSON.stringify(entity) }).then(function (data) {
+                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/fish', data: JSON.stringify(entity) }).then(function (data) {
+                    if (data.data.message) {
+                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
+                    }
+
                     resolve(data);
                 }, function (err) {
                     errorHandler(err);

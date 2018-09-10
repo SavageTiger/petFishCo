@@ -2,8 +2,6 @@
 
 namespace SvenH\PetFishCo\Model;
 
-use Symfony\Component\Serializer\Annotation\Groups;
-
 /**
  * Picture
  */
@@ -44,8 +42,6 @@ class Picture implements PictureInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getFilename(): string
     {
@@ -54,8 +50,6 @@ class Picture implements PictureInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"detail"})
      */
     public function getBinary(bool $asBase64 = true): string
     {

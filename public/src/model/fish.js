@@ -2,9 +2,9 @@
 app.factory('Fish', ['Api', function (api) {
 
     function Fish(id, name, family) {
-        this.id         = id;
-        this.name       = name;
-        this.familyName = family;
+        this.id     = id;
+        this.name   = name;
+        this.family = family;
     }
 
     Fish.prototype.unserialize = function (data) {
@@ -15,6 +15,8 @@ app.factory('Fish', ['Api', function (api) {
 
     Fish.prototype.loadClone = function(callback) {
         api.loadEntity('fish', this.id).then(function (data) {
+
+            console.log(data);
             var fish = new Fish();
 
             fish.unserialize(data.data);
@@ -24,11 +26,6 @@ app.factory('Fish', ['Api', function (api) {
     };
 
     Fish.prototype.save = function () {
-        if (this.id) {
-
-        } else {
-        }
-
         api.saveEntity(this);
     };
 

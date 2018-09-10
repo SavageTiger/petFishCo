@@ -1,6 +1,6 @@
 <?php
 
-namespace SvenH\PetFishCo\Managers;
+namespace SvenH\PetFishCo\ORM;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -45,5 +45,26 @@ abstract class AbstractORMManager
     public function findAll(): array
     {
         return $this->em->getRepository($this->className)->findAll();
+    }
+
+    /**
+     * Update entity
+     *
+     * @param $entity
+     */
+    public function update($entity)
+    {
+        $this->em->persist($entity);
+        $this->em->flush();
+    }
+
+    /**
+     * Get the className of the primary subject handled by this manager
+     *
+     * @return string
+     */
+    public function getManagedClass(): string
+    {
+        return $this->className;
     }
 }

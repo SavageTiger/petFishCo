@@ -12,7 +12,7 @@
 
             <div ng-repeat="fish in fishes|orderBy:family" class="link" ng-class-even="'even'" ng-class-odd="'odd'">
                 <div ng-if="shouldRenderHeader(fish)">
-                    <h3>{{ fish.familyName }}</h3>
+                    <h3>{{ fish.family }}</h3>
                 </div>
 
                 <a href="#" ng-click="selectFish(fish)">{{ fish.name }}</a>
@@ -34,12 +34,12 @@
 
                         <tr>
                             <th scope="row">Latin name</th>
-                            <td><input type="text" class="form-control" ng-model="viewModel.latinName" /></td>
+                            <td><input type="text" class="form-control" ng-model="viewModel.latin_name" /></td>
                         </tr>
 
                         <tr>
                             <th scope="row">Family</th>
-                            <td><ng-property-selector ng-model="viewModel.familyName" property-type="Fish Family" /></td>
+                            <td><ng-property-selector ng-model="viewModel.family" property-type="Fish Family" /></td>
                         </tr>
 
                         <tr>

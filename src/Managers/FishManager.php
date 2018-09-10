@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use SvenH\PetFishCo\Entity\Fish;
 use SvenH\PetFishCo\Model\FishInterface;
 use SvenH\PetFishCo\Model\PropertyInterface;
+use SvenH\PetFishCo\ORM\AbstractORMManager;
 
 /**
  * Manager for fish entity

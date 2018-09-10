@@ -2,6 +2,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
+        <!-- Data fixtures -->
         <service id="petfishco.fixtures.fish" class="SvenH\PetFishCo\DataFixtures\FishFixtures">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
@@ -15,6 +16,24 @@
         <service id="petfishco.fixtures.mutations" class="SvenH\PetFishCo\DataFixtures\MutationFixtures">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
+        </service>
+
+        <!-- Property Type Handler -->
+
+        <service id="property_handler" class="SvenH\PetFishCo\Serializer\PropertyTypeHandler">
+            <argument type="service" id="petfishco.manager.property" />
+            <tag name="jms_serializer.handler" type="property" format="json" />
+        </service>
+
+
+        <!-- Custom JMS object constructor -->
+        <service id="petfishco.orm.doctrine_object_constructor" class="SvenH\PetFishCo\ORM\DoctrineObjectConstructor" public="false">
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="jms_serializer.unserialize_object_constructor"/>
+
+            <call method="setRequest">
+                <argument type="service" id="request_stack" />
+            </call>
         </service>
 
     </services>

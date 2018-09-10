@@ -2,8 +2,6 @@
 
 namespace SvenH\PetFishCo\Model;
 
-use Symfony\Component\Serializer\Annotation\Groups;
-
 /**
  * Fish
  */
@@ -46,8 +44,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getId(): string
     {
@@ -64,8 +60,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getName(): string
     {
@@ -74,8 +68,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"detail"})
      */
     public function setLatinName(string $name)
     {
@@ -108,8 +100,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getFamilyName(): string
     {
@@ -126,8 +116,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"list", "detail"})
      */
     public function getColor(): string
     {
@@ -144,8 +132,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"detail"})
      */
     public function getFins(): int
     {
@@ -162,8 +148,6 @@ class Fish implements FishInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @Groups({"detail"})
      */
     public function getPicture(): PictureInterface
     {
