@@ -36,8 +36,24 @@ class Property implements PropertyInterface
     /**
      * {@inheritdoc}
      */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValue(): string
     {
         return $this->value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setValue(string $value)
+    {
+        $this->value = $value;
     }
 }

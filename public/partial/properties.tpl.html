@@ -1,0 +1,84 @@
+
+<div ng-controller="propertiesCtrl" class="row-correction">
+
+    <div class="row">
+        <div class="col-md-12">
+            <button ng-click="createNew()" ng-disabled="!type" class="btn btn-success btn-new float-right"><i class="fas fa-plus-circle"></i>&nbsp;Create new</button>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <div class="list-group">
+
+                <a ng-repeat="type in propertyTypes" ng-click="selectType(type)" class="view-list-item" href="#">
+                    {{ type.display_name }}
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-9" ng-if="viewType == 'list'">
+
+            <h2>{{ type.display_name }}</h2>
+
+            <div class="bg-trans">
+                <div class="row pb-1" ng-repeat="property in properties">
+                    <div class="col-md-5">{{ property.value }}</div>
+                    <div class="col-md-5">
+
+                        <button ng-click="editProperty(property)" class="btn btn-sm btn-primary"><i class="fas fa-pencil-alt"></i></button>
+                        <button ng-click="removeProperty(property)" class="btn btn-sm btn-warning"><i class="fas fa-trash"></i></button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-9" ng-if="viewType == 'edit'">
+            <h2>{{ type.display_name }}</h2>
+
+            <form class="bg-trans">
+                <div class="form-group form-horizontal">
+
+                    <div class="form-group row">
+                        <label for="displayName" class="col-sm-2 col-form-label"><b>Display name</b></label>
+
+                        <div class="col-sm-10">
+                            <input id="displayName" type="text" class="form-control" ng-model="property.value">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-primary float-right" ng-click="save(property)"><i class="fas fa-save"></i>&nbsp;Save</button>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-9" ng-if="viewType == 'remove'">
+            <h2>{{ type.display_name }}</h2>
+
+            <div class="bg-trans">
+                <div class="row">
+                    <div class="col-12">
+                        Remove the property with value "{{ property.value }}"?
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button ng-click="selectType(type)" class="btn btn-sm m-1"><i class="fas fa-times"></i> No</button>
+                        <button ng-click="applyRemoveProperty(property)" class="btn btn-sm btn-warning m-1"><i class="fas fa-check"></i> Yes</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -4,6 +4,7 @@
 
         <service id="petfishco.manager.property" class="SvenH\PetFishCo\Managers\PropertyManager" public="true">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="validator" />
         </service>
 
         <service id="petfishco.manager.aquarium" class="SvenH\PetFishCo\Managers\AquariumManager" public="true">

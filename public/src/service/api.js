@@ -18,6 +18,52 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
             });
         },
 
+        getAvailableTypes: function () {
+            return $q(function (resolve, reject) {
+                $http.get('api.php/properties/types').then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        saveProperty: function (property, propertyType) {
+            return $q(function (resolve, reject) {
+                property = { id: property.id, display_name: property.value };
+
+                $http({ method: property.id ? 'PATCH' : 'POST', url: 'api.php/properties/update/' + propertyType, data: JSON.stringify(property) }).then(function (data) {
+                    if (data.data.message) {
+                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
+                    }
+
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        removeProperty: function (property) {
+            return $q(function (resolve, reject) {
+                $http({ method: 'POST', url: 'api.php/properties/remove/' + property.id }).then(function (data) {
+                    if (data.data.message) {
+                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
+                    }
+
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
         loadEntityList: function (entityType) {
             return $q(function (resolve, reject) {
                 $http.get('api.php/entity/list/' + entityType).then(function (data) {
@@ -48,7 +94,9 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
                 $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: JSON.stringify(entity) }).then(function (data) {
                     if (data.data.id) {
                         entity.id = data.data.id;
+                    }
 
+                    if (data.data.message) {
                         notification.success('Success:<br /><b>' + data.data.message + '</b>')
                     }
 
@@ -59,7 +107,6 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
                     reject(err);
                 });
             });
-
         }
     }
 
