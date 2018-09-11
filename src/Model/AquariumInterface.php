@@ -80,9 +80,9 @@ interface AquariumInterface
      public function getVolume(string $unit): float;
 
      /**
-      * Get the amount of fish in this aquarium in the following format [ 'fish-uuid' => <count>, ... ]
+      * Get the amount of fish in this aquarium in the following format [ 'fish' => Fish, 'amount' => 123 ]
       *
       * @return array
       */
-     public function getFishInventory(): array;
+     public function getInventory(): array;
 }

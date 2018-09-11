@@ -6,6 +6,83 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
     };
 
     return {
+
+        // -----------------------------------[ Entity routes ] -----------------------------------------------
+
+        loadEntityList: function (entityType) {
+            return $q(function (resolve, reject) {
+                $http.get('api.php/entity/list/' + entityType).then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        loadEntity: function (entityType, id) {
+            return $q(function (resolve, reject) {
+                $http.get('api.php/entity/load/' + entityType + '/' + id).then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        saveEntity: function (typeName, entity)
+        {
+            return $q(function (resolve, reject) {
+                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: JSON.stringify(entity) }).then(function (data) {
+                    if (data.data.id) {
+                        entity.id = data.data.id;
+                    }
+
+                    if (data.data.message) {
+                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
+                    }
+
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        // -----------------------------------[ Inventory routes ] -----------------------------------------------
+
+
+        getInventoryList: function () {
+            return $q(function (resolve, reject) {
+                $http.get('api.php/inventory/list').then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        getInventoryDetails: function (aquariumId) {
+            return $q(function (resolve, reject) {
+                $http.get('api.php/inventory/details/' + aquariumId).then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
+        // -----------------------------------[ Property routes ] -----------------------------------------------
+
         getProperties: function (propertyType) {
             return $q(function (resolve, reject) {
                 $http.get('api.php/properties/list/' + propertyType).then(function (data) {
@@ -51,51 +128,6 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
         removeProperty: function (property) {
             return $q(function (resolve, reject) {
                 $http({ method: 'POST', url: 'api.php/properties/remove/' + property.id }).then(function (data) {
-                    if (data.data.message) {
-                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
-                    }
-
-                    resolve(data);
-                }, function (err) {
-                    errorHandler(err);
-
-                    reject(err);
-                });
-            });
-        },
-
-        loadEntityList: function (entityType) {
-            return $q(function (resolve, reject) {
-                $http.get('api.php/entity/list/' + entityType).then(function (data) {
-                    resolve(data);
-                }, function (err) {
-                    errorHandler(err);
-
-                    reject(err);
-                });
-            });
-        },
-
-        loadEntity: function (entityType, id) {
-            return $q(function (resolve, reject) {
-                $http.get('api.php/entity/load/' + entityType + '/' + id).then(function (data) {
-                    resolve(data);
-                }, function (err) {
-                    errorHandler(err);
-
-                    reject(err);
-                });
-            });
-        },
-
-        saveEntity: function (typeName, entity)
-        {
-            return $q(function (resolve, reject) {
-                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: JSON.stringify(entity) }).then(function (data) {
-                    if (data.data.id) {
-                        entity.id = data.data.id;
-                    }
-
                     if (data.data.message) {
                         notification.success('Success:<br /><b>' + data.data.message + '</b>')
                     }

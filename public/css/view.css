@@ -8,10 +8,6 @@
     border-bottom: 1px solid black;
 }
 
-.container {
-    padding: 25px;
-}
-
 .view-title {
     font-weight: bold;
     font-size: 20px;
@@ -70,4 +66,16 @@
 .row-correction > .row:first-child {
     position: relative;
     top: -55px;
+}
+
+.card {
+    margin: 20px;
+}
+
+.card-title {
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+.table-bordered {
+    border-width: 2px;
 }

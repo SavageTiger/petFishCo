@@ -4,6 +4,7 @@ namespace SvenH\PetFishCo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use SvenH\PetFishCo\Model\AquariumMutation as BaseAquariumMutation;
+use JMS\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\Entity
@@ -21,6 +22,8 @@ class AquariumMutation extends BaseAquariumMutation
     /**
      * @ORM\ManyToOne(targetEntity="Fish")
      * @ORM\JoinColumn(name="fish_id", referencedColumnName="id", nullable=false)
+     *
+     * @Serializer\Groups({"mutations"})
      */
     protected $fish;
 
@@ -32,11 +35,15 @@ class AquariumMutation extends BaseAquariumMutation
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Groups({"mutations"})
      */
     protected $amount = 0;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Serializer\Groups({"mutations"})
      */
     protected $timestamp;
 }

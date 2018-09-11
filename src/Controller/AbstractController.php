@@ -12,8 +12,8 @@ abstract class AbstractController extends Controller
     /**
      * Transform entity objects into arrays using serialization
      *
-     * @param string $context
-     * @param mixed  $data
+     * @param string|array $context
+     * @param mixed        $data
      *
      * @return array
      */

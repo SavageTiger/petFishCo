@@ -19,7 +19,7 @@ class Aquarium extends BaseAquarium
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue("UUID")
      *
-     * @Serializer\Groups({"list", "detail"})
+     * @Serializer\Groups({"list", "detail", "inventory"})
      */
     protected $id;
 
@@ -28,7 +28,7 @@ class Aquarium extends BaseAquarium
      *
      * @Assert\NotBlank(message="Please provide a brief description");
      *
-     * @Serializer\Groups({"list", "detail"})
+     * @Serializer\Groups({"list", "detail", "inventory"})
      */
     protected $description;
 
@@ -38,7 +38,7 @@ class Aquarium extends BaseAquarium
      * @Assert\NotBlank(message="Please set a Shape");
      *
      * @Serializer\Type("property<Shape>")
-     * @Serializer\Groups({"detail"})
+     * @Serializer\Groups({"detail", "inventory"})
      */
     protected $shape;
 
@@ -48,7 +48,7 @@ class Aquarium extends BaseAquarium
      * @Assert\NotBlank(message="Please select a glass type");
      *
      * @Serializer\Type("property<Glass>")
-     * @Serializer\Groups({"detail"})
+     * @Serializer\Groups({"detail", "inventory"})
      */
     protected $glassType;
 
@@ -58,7 +58,7 @@ class Aquarium extends BaseAquarium
      * @Assert\NotBlank(message="Please provide the volume of the aquarium");
      * @Assert\GreaterThan(value="0", message="Aquarium to small")
      *
-     * @Serializer\Groups({"detail"})
+     * @Serializer\Groups({"detail", "inventory"})
      */
     protected $volume;
 
@@ -67,14 +67,23 @@ class Aquarium extends BaseAquarium
      *
      * @Assert\Regex(pattern="/liters|gallons/", message="Unsupported volume unit (supported is liters and gallons)");
      *
-     * @Serializer\Groups({"detail"})
+     * @Serializer\Groups({"detail", "inventory"})
      */
     protected $volumeUnit = 'liters';
 
     /**
      * @ORM\OneToMany(targetEntity="AquariumMutation", mappedBy="aquarium")
+     * @ORM\OrderBy({"timestamp" = "ASC"})
+     *
+     * @Serializer\Groups({"mutations"})
      */
     protected $mutations;
+
+    /**
+     * @Serializer\Groups({"inventory"})
+     * @Serializer\Accessor(getter="getInventory")
+     */
+    protected $inventory;
 
     /**
      * @return string

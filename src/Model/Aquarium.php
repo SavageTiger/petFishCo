@@ -155,19 +155,31 @@ class Aquarium implements AquariumInterface
     /**
      * {@inheritdoc}
      */
-    public function getFishInventory(): array
+    public function getInventory(): array
     {
+        $buffer    = [];
         $amount    = [];
+        $fishes    = [];
+
         $mutations = $this->mutations;
 
         foreach ($mutations as $mutation) {
             if (isset($amount[$mutation->getFish()->getId()]) === false) {
                 $amount[$mutation->getFish()->getId()] = 0;
+                $fishes[$mutation->getFish()->getId()] = $mutation->getFish();
             }
 
             $amount[$mutation->getFish()->getId()] += $mutation->getAmount();
         }
 
-        return $amount;
+        foreach($fishes as $fishId => $fish)
+        {
+            $buffer[] = [
+                'fish' => $fish,
+                'amount' => $amount[$fishId]
+            ];
+        }
+
+        return $buffer;
     }
 }

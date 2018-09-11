@@ -1,0 +1,99 @@
+
+<div ng-controller="inventoryCtrl">
+
+    <script type="text/ng-template" id="aquariumInfo">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card-subtitel"><small>{{ aquarium.volume }}&nbsp;{{ aquarium.volume_unit }}</small></div>
+                <div class="card-subtitel"><small>{{ aquarium.glass_type }}</small></div>
+                <div class="card-subtitel"><small>{{ aquarium.shape }}</small></div>
+            </div>
+            <div class="col-md-9">
+                <div class="card-subtitle text-muted" ng-if="aquarium.inventory.length == 0">This aquarium is empty</div>
+
+                <div ng-if="aquarium.inventory.length > 0">
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>Amount</th>
+                            <th>What kind of fish</th>
+                        </tr>
+                        <tr ng-repeat="inventoryItem in aquarium.inventory">
+                            <td width="10%">
+                                <span ng-if="viewType == 'list'">{{ inventoryItem.amount }}</span>
+                                <span ng-if="viewType == 'detail'">
+                                    <input type="text" class="form-control" ng-init="fishAmount[inventoryItem.fish.id] = inventoryItem.amount" ng-model="fishAmount[inventoryItem.fish.id]" />
+                                </span>
+                            </td>
+                            <td>{{ inventoryItem.fish.name }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <div class="row">
+
+        <div class="col-md-12" ng-if="viewType == 'list'">
+            <div class="card bg-light" ng-repeat="aquarium in inventory">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 class="card-title">{{ aquarium.description }}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="float-right btn btn-sm btn-outline-dark" ng-click="details(aquarium.id)">Update</button>
+                        </div>
+                    </div>
+
+                    <div ng-include="'aquariumInfo'"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12" ng-if="viewType == 'detail'">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h5 class="card-title">{{ aquarium.description }}</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <button class="float-right btn btn-sm btn-outline-dark" ng-click="back()">Back</button>
+                        </div>
+                    </div>
+
+                    <div ng-include="'aquariumInfo'"></div>
+                </div>
+            </div>
+
+            <div class="card bg-light">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5 class="card-title">History</h5>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered table-sm">
+                        <tr>
+                            <th>When</th>
+                            <th>Fish added or removed</th>
+                        </tr>
+                        <tr ng-repeat="mutation in aquarium.mutations">
+                            <td width="30%">
+                                {{ mutation.timestamp|date:'short' }}
+                            </td>
+                            <td>
+                                <div ng-if="mutation.amount >= 0 ">Added {{ mutation.amount }} {{ mutation.fish.name }}</div>
+                                <div ng-if="mutation.amount < 0 ">Removed {{ -(mutation.amount) }} {{ mutation.fish.name }}</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>

@@ -18,7 +18,7 @@ class Fish extends BaseFish
      * @ORM\Column(type="guid")
      * @ORM\GeneratedValue("UUID")
      *
-     * @Serializer\Groups({"list", "detail"})
+     * @Serializer\Groups({"list", "detail", "inventory"})
      */
     protected $id;
 
@@ -27,7 +27,7 @@ class Fish extends BaseFish
      *
      * @ORM\Column(type="string", nullable=false, length=64)
      *
-     * @Serializer\Groups({"list", "detail"})
+     * @Serializer\Groups({"list", "detail", "inventory"})
      */
     protected $name;
 

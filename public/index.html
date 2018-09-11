@@ -19,6 +19,7 @@
         <script src="src/controllers/header.js"></script>
         <script src="src/controllers/fish.js"></script>
         <script src="src/controllers/aquaria.js"></script>
+        <script src="src/controllers/inventory.js"></script>
         <script src="src/controllers/properties.js"></script>
         <script src="src/service/api.js"></script>
         <script src="src/directives/image.js"></script>
@@ -40,9 +41,11 @@
                 <div ng-include="headerTpl"></div>
             </div>
 
-            <div class="container bg-light" ng-if="viewTitle">
-                <div class="view-title">{{ viewTitle }}</div>
-                <div ng-include="viewTpl"></div>
+            <div class="scroll-container">
+                <div class="container bg-light" ng-if="viewTitle">
+                    <div class="view-title">{{ viewTitle }}</div>
+                    <div ng-include="viewTpl"></div>
+                </div>
             </div>
 
         </div>
