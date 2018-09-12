@@ -56,7 +56,7 @@ class Aquarium extends BaseAquarium
      * @ORM\Column(type="float", nullable=false)
      *
      * @Assert\NotBlank(message="Please provide the volume of the aquarium");
-     * @Assert\GreaterThan(value="0", message="Aquarium to small")
+     * @Assert\GreaterThan(value="0", message="Aquarium has no volume")
      *
      * @Serializer\Groups({"detail", "inventory"})
      */
@@ -84,12 +84,4 @@ class Aquarium extends BaseAquarium
      * @Serializer\Accessor(getter="getInventory")
      */
     protected $inventory;
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return (string) $this->description;
-    }
 }

@@ -34,12 +34,4 @@ class Picture extends BasePicture
      * @Serializer\Groups({"list", "detail"})
      */
     protected $binary;
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return (string) $this->filename;
-    }
 }

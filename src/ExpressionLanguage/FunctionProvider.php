@@ -33,7 +33,16 @@ class FunctionProvider implements ExpressionFunctionProviderInterface
         ];
     }
 
-
+    /**
+     * Execute evaluation on all the items in in collection
+     *
+     * Every item will be available in the context as 'item'
+     *
+     * @param array  $collection
+     * @param string $expression
+     *
+     * @return bool
+     */
     public function evaluateCollection(array $collection, string $expression)
     {
         foreach ($collection as $item) {

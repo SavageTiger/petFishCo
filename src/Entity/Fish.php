@@ -76,12 +76,4 @@ class Fish extends BaseFish
      * @Serializer\Groups({"detail"})
      */
     protected $picture;
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return (string) $this->name;
-    }
 }

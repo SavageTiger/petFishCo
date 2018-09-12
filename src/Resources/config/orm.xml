@@ -3,22 +3,22 @@
     <services>
 
         <!-- Data fixtures -->
-        <service id="petfishco.fixtures.fish" class="SvenH\PetFishCo\DataFixtures\FishFixtures">
+        <service id="petfishco.fixtures.fish" class="SvenH\PetFishCo\DataFixtures\FishFixtures" public="true">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
         </service>
 
-        <service id="petfishco.fixtures.restrictions" class="SvenH\PetFishCo\DataFixtures\RestrictionsFixtures">
+        <service id="petfishco.fixtures.restrictions" class="SvenH\PetFishCo\DataFixtures\RestrictionsFixtures" public="true">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
         </service>
 
-        <service id="petfishco.fixtures.aquarium" class="SvenH\PetFishCo\DataFixtures\AquariumFixtures">
+        <service id="petfishco.fixtures.aquarium" class="SvenH\PetFishCo\DataFixtures\AquariumFixtures" public="true">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
         </service>
 
-        <service id="petfishco.fixtures.mutations" class="SvenH\PetFishCo\DataFixtures\MutationFixtures">
+        <service id="petfishco.fixtures.mutations" class="SvenH\PetFishCo\DataFixtures\MutationFixtures" public="true">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />
         </service>

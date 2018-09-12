@@ -13,7 +13,7 @@ class ExceptionListener
         $exception     = $event->getException();
         $acceptedTypes = $event->getRequest()->getAcceptableContentTypes();
 
-        if (in_array('application/json', $acceptedTypes) === true) {
+        if (in_array('application/json', $acceptedTypes) === true || $event->getRequest()->isXmlHttpRequest() === true) {
             $event->setResponse(new JsonResponse([
                 'message' => $exception->getMessage(),
                 'code' => $exception->getCode()

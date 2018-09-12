@@ -50,6 +50,7 @@ app.controller('inventoryCtrl', ['$scope', 'Api', 'Collection', 'Notification', 
         });
 
         api.updateInventory($scope.aquarium.id, updated).then(function() {
+            $scope.loadInventoryList();
             $scope.back();
         });
     };
@@ -63,9 +64,12 @@ app.controller('inventoryCtrl', ['$scope', 'Api', 'Collection', 'Notification', 
     };
 
     // Load inventory overview
-    api.getInventoryList().then(function(data) {
-        $scope.inventory = data.data;
-    });
+    $scope.loadInventoryList = function() {
+        api.getInventoryList().then(function(data) {
+            $scope.inventory = data.data;
+        });
+    };
+    $scope.loadInventoryList();
 
     // Load fishes
     collection.load('fish', function(fishes) {
