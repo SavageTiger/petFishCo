@@ -84,6 +84,10 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
         updateInventory: function (aquariumId, payload) {
             return $q(function (resolve, reject) {
                 $http({ method: 'PATCH', url: 'api.php/inventory/update/' + aquariumId, data: payload }).then(function (data) {
+                    if (data.data.message) {
+                        notification.success('Success:<br /><b>' + data.data.message + '</b>')
+                    }
+
                     resolve(data);
                 }, function (err) {
                     errorHandler(err);

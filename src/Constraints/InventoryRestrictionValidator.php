@@ -48,7 +48,6 @@ class InventoryRestrictionValidator extends ConstraintValidator
         foreach ($restrictions as $restriction) {
             $restriction = $expressionLanguage->evaluate($restriction);
 
-            //
             $violation = (bool) $expressionLanguage->evaluate($restriction['expression'], $context);
 
             if ($violation === true) {

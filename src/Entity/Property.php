@@ -31,4 +31,12 @@ class Property extends BaseProperty
      * @ORM\Column(type="string", nullable=false)
      */
     protected $type;
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->value;
+    }
 }

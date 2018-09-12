@@ -2,6 +2,7 @@
 ###> symfony/framework-bundle ###
 /.idea
 /.env
+/.env.test
 /public/bundles/
 /var/
 /vendor/

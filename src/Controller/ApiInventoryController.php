@@ -50,6 +50,6 @@ class ApiInventoryController extends AbstractController
 
         $manager->mutate($aquarium, $payload);
 
-        return new JsonResponse();
+        return new JsonResponse(['message' => 'Updated inventory']);
     }
 }
