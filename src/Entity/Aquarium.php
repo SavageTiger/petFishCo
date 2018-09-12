@@ -73,7 +73,7 @@ class Aquarium extends BaseAquarium
 
     /**
      * @ORM\OneToMany(targetEntity="AquariumMutation", mappedBy="aquarium")
-     * @ORM\OrderBy({"timestamp" = "ASC"})
+     * @ORM\OrderBy({"timestamp" = "DESC"})
      *
      * @Serializer\Groups({"mutations"})
      */

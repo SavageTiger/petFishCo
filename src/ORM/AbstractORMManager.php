@@ -77,15 +77,7 @@ abstract class AbstractORMManager
      */
     public function update($entity)
     {
-        $invalid = $this->validator->validate($entity);
-
-        if (count($invalid) > 0) {
-            /** @var ConstraintViolation $violation */
-            $violation = current($invalid);
-            $violation = $violation[0];
-
-            throw new \Exception($violation->getMessage());
-        }
+        $this->validate($entity);
 
         $this->em->persist($entity);
         $this->em->flush();
@@ -99,5 +91,25 @@ abstract class AbstractORMManager
     public function getManagedClass(): string
     {
         return $this->className;
+    }
+
+    /**
+     * Validate entity, throw exception when invalid
+     *
+     * @param mixed $entity
+     *
+     * @throws \Exception
+     */
+    protected function validate($entity)
+    {
+        $invalid = $this->validator->validate($entity);
+
+        if (count($invalid) > 0) {
+            /** @var ConstraintViolation $violation */
+            $violation = current($invalid);
+            $violation = $violation[0];
+
+            throw new \Exception($violation->getMessage());
+        }
     }
 }

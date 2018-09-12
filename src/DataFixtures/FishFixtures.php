@@ -22,13 +22,13 @@ class FishFixtures extends AbstractFixture
                 'latinName' => 'Poecilia reticulata',
                 'family'    => 'Poeciliidae',
                 'color'     => 'C62626',
-                'fins'      => 3
+                'fins'      => 2
             ], [
                 'name'      => 'Guppy (Goud)',
                 'latinName' => 'Poecilia reticulata',
                 'family'    => 'Poeciliidae',
                 'color'     => 'FF6C00',
-                'fins'      => 3
+                'fins'      => 2
             ], [
                 'name'      => 'Driebandanemoonvis',
                 'latinName' => 'Amphiprion ocellaris',

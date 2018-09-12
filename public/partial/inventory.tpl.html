@@ -21,7 +21,7 @@
                             <td width="10%">
                                 <span ng-if="viewType == 'list'">{{ inventoryItem.amount }}</span>
                                 <span ng-if="viewType == 'detail'">
-                                    <input type="text" class="form-control" ng-change="setChanged(inventoryItem.id)" ng-model="inventoryItem.amount" />
+                                    <input type="text" class="form-control" ng-change="inventoryItem.touched = true" ng-model="inventoryItem.amount" />
                                 </span>
                             </td>
                             <td>{{ inventoryItem.fish.name }}</td>
@@ -38,6 +38,8 @@
                         </tr>
                     </table>
                 </div>
+
+                <button class="float-right btn btn-success" ng-if="viewType == 'detail'" ng-click="updateInventory()"><i class="far fa-save"></i>&nbsp;Update inventory</button>
             </div>
         </div>
     </script>

@@ -18,7 +18,7 @@ class PetFishCoExtension extends Extension
         $xmlLoader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $ymlLoader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $serviceFiles = ['orm.xml', 'manager.xml', 'listener.xml'];
+        $serviceFiles = ['orm.xml', 'manager.xml', 'listener.xml', 'validation.xml'];
 
         foreach ($serviceFiles as $file) {
             if (strpos($file, '.xml') !== false) {

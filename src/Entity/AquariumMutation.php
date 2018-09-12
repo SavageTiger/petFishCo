@@ -9,6 +9,8 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * @ORM\Entity
  * @ORM\Table(name="aquarium_fish_mutation")
+ *
+ * @SvenH\PetFishCo\Constraints\InventoryRestriction
  */
 class AquariumMutation extends BaseAquariumMutation
 {

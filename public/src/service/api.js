@@ -36,7 +36,7 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
         saveEntity: function (typeName, entity)
         {
             return $q(function (resolve, reject) {
-                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: JSON.stringify(entity) }).then(function (data) {
+                $http({ method: entity.id ? 'PATCH' : 'POST', url: 'api.php/entity/' + typeName, data: entity }).then(function (data) {
                     if (data.data.id) {
                         entity.id = data.data.id;
                     }
@@ -81,6 +81,18 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
             });
         },
 
+        updateInventory: function (aquariumId, payload) {
+            return $q(function (resolve, reject) {
+                $http({ method: 'PATCH', url: 'api.php/inventory/update/' + aquariumId, data: payload }).then(function (data) {
+                    resolve(data);
+                }, function (err) {
+                    errorHandler(err);
+
+                    reject(err);
+                });
+            });
+        },
+
         // -----------------------------------[ Property routes ] -----------------------------------------------
 
         getProperties: function (propertyType) {
@@ -111,7 +123,7 @@ app.factory('Api', ['$q', '$http', 'Notification', function ($q, $http, notifica
             return $q(function (resolve, reject) {
                 property = { id: property.id, display_name: property.value };
 
-                $http({ method: property.id ? 'PATCH' : 'POST', url: 'api.php/properties/update/' + propertyType, data: JSON.stringify(property) }).then(function (data) {
+                $http({ method: property.id ? 'PATCH' : 'POST', url: 'api.php/properties/update/' + propertyType, data: property }).then(function (data) {
                     if (data.data.message) {
                         notification.success('Success:<br /><b>' + data.data.message + '</b>')
                     }

@@ -29,11 +29,30 @@ app.controller('inventoryCtrl', ['$scope', 'Api', 'Collection', 'Notification', 
 
         $scope.aquarium.inventory.push({
             amount: 0,
-            fish: fishKind
+            fish: fishKind,
+            touched: true
         });
     };
 
+    /**
+     * Send an array of changed fish to the back-end
+     */
+    $scope.updateInventory = function() {
+        var updated = [];
 
+        angular.forEach($scope.aquarium.inventory, function (item) {
+            if (item.touched) {
+                updated.push({
+                    fishId: item.fish.id,
+                    amount: item.amount
+                });
+            }
+        });
+
+        api.updateInventory($scope.aquarium.id, updated).then(function() {
+            $scope.back();
+        });
+    };
 
     /**
      * Return to list view

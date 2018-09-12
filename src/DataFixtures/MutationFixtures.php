@@ -48,9 +48,10 @@ class MutationFixtures extends AbstractFixture
                 $fishName = array_keys($mutation)[0];
                 $amount   = current($mutation);
 
-                $fish = $fishManager->findOneByName($fishName);
+                $fish      = $fishManager->findOneByName($fishName);
+                $mutations = [['fishId' => $fish->getId(), 'amount' => $amount]];
 
-                $aquariumManager->mutate($fish, $aquarium, $amount);
+                $aquariumManager->mutate($aquarium, $mutations);
             }
         }
 

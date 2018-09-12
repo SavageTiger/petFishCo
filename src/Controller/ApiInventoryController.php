@@ -3,6 +3,7 @@
 namespace SvenH\PetFishCo\Controller;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ApiInventoryController extends AbstractController
@@ -27,9 +28,28 @@ class ApiInventoryController extends AbstractController
         $aquarium = $manager->findOneById($aquariumId);
 
         if ($aquarium === null) {
-            throw new $this->createNotFoundException();
+            throw $this->createNotFoundException();
         }
 
         return new JsonResponse(current($this->serialize(['inventory', 'mutations'], [ $aquarium ])));
+    }
+
+    /**
+     * @Route("/inventory/update/{aquariumId}", name="api_inventory_update", methods={"PATCH"})
+     */
+    public function apiInventoryUpdateAction(Request $request, $aquariumId)
+    {
+        $manager  = $this->getManager('aquarium');
+        $aquarium = $manager->findOneById($aquariumId);
+
+        if ($aquarium === null) {
+            throw $this->createNotFoundException();
+        }
+
+        $payload = json_decode($request->getContent(), true);
+
+        $manager->mutate($aquarium, $payload);
+
+        return new JsonResponse();
     }
 }

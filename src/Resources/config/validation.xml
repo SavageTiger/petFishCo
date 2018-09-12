@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="petfishco.expression_language.factory" class="SvenH\PetFishCo\ExpressionLanguage\ExpressionLanguageFactory">
+        </service>
+
+        <service id="petfishco.validation.inventory_restriction" class="SvenH\PetFishCo\Constraints\InventoryRestrictionValidator">
+            <argument type="service" id="petfishco.expression_language.factory" />
+            <argument type="service" id="petfishco.manager.property" />
+
+            <tag name="validator.constraint_validator" alias="inventory_restriction" />
+        </service>
+
+    </services>
+</container>

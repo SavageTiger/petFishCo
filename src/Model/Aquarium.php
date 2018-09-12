@@ -139,7 +139,7 @@ class Aquarium implements AquariumInterface
      */
     public function getVolume(string $unit = 'liters'): float
     {
-        if ($unit !== 'liters' || $unit !== 'gallons') {
+        if ($unit !== 'liters' && $unit !== 'gallons') {
             throw new \Exception('Invalid unit requested, supported units are "liters" and "gallons"');
         }
 
@@ -153,13 +153,32 @@ class Aquarium implements AquariumInterface
     }
 
     /**
+     * Get fishes in this aquarium
+     *
+     * @return array<FishesInterface>
+     */
+    public function getFishes(): array
+    {
+        $buffer   = [];
+        $inventory = $this->getInventory();
+
+        foreach ($inventory as $inventoryItem) {
+            if ($inventoryItem['amount'] > 0) {
+                $buffer[] = $inventoryItem['fish'];
+            }
+        }
+
+        return $buffer;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getInventory(): array
     {
-        $buffer    = [];
-        $amount    = [];
-        $fishes    = [];
+        $buffer = [];
+        $amount = [];
+        $fishes = [];
 
         $mutations = $this->mutations;
 
@@ -174,10 +193,12 @@ class Aquarium implements AquariumInterface
 
         foreach($fishes as $fishId => $fish)
         {
-            $buffer[] = [
-                'fish' => $fish,
-                'amount' => $amount[$fishId]
-            ];
+            if ((int) $amount[$fishId] !== 0) {
+                $buffer[] = [
+                    'fish' => $fish,
+                    'amount' => $amount[$fishId]
+                ];
+            }
         }
 
         return $buffer;

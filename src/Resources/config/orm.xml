@@ -8,6 +8,11 @@
             <tag name="doctrine.fixture.orm" />
         </service>
 
+        <service id="petfishco.fixtures.restrictions" class="SvenH\PetFishCo\DataFixtures\RestrictionsFixtures">
+            <argument type="service" id="service_container" />
+            <tag name="doctrine.fixture.orm" />
+        </service>
+
         <service id="petfishco.fixtures.aquarium" class="SvenH\PetFishCo\DataFixtures\AquariumFixtures">
             <argument type="service" id="service_container" />
             <tag name="doctrine.fixture.orm" />

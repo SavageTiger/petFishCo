@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use SvenH\PetFishCo\Entity\Aquarium;
 use SvenH\PetFishCo\Entity\AquariumMutation;
 use SvenH\PetFishCo\Model\AquariumInterface;
-use SvenH\PetFishCo\Model\FishInterface;
 use SvenH\PetFishCo\Model\PropertyInterface;
 use SvenH\PetFishCo\ORM\AbstractORMManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -22,30 +21,78 @@ class AquariumManager extends AbstractORMManager
     protected $propertyManager;
 
     /**
+     * @var FishManager
+     */
+    protected $fishManager;
+
+    /**
      * @param EntityManagerInterface $em
      * @param ValidatorInterface     $validator
+     * @param FishManager            $fishManager
      * @param PropertyManager        $propertyManager
      */
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, PropertyManager $propertyManager)
+    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, FishManager $fishManager, PropertyManager $propertyManager)
     {
         $this->em              = $em;
         $this->validator       = $validator;
+        $this->fishManager     = $fishManager;
         $this->propertyManager = $propertyManager;
         $this->className       = Aquarium::class;
     }
 
     /**
-     * Mutate (add or remove fish) from a aquarium
+     * Mutate (add or remove fish) from an aquarium
      *
-     * @param FishInterface     $fish
+     * Calculates state changes and generates mutations
+     *
+     * Payload format example:
+     * [ [ 'fishId' => '...', amount => 123 ], [ ... ], [ ... ]]
+     *
      * @param AquariumInterface $aquarium
-     * @param int               $amount
+     * @param array             $payload
+     *
+     * @throws \Exception
      */
-    public function mutate(FishInterface $fish, AquariumInterface $aquarium, int $amount)
+    public function mutate(AquariumInterface $aquarium, array $payload = [])
     {
-        $mutation = new AquariumMutation($fish, $aquarium, $amount);
+        $currentState = $aquarium->getInventory();
 
-        $this->em->persist($mutation);
+        $findFish = function (string $fishId) use ($currentState): ?array  {
+            foreach ($currentState as $inventoryItem) {
+                if ($inventoryItem['fish']->getId() === $fishId) {
+                    return $inventoryItem;
+                }
+            }
+
+            return null;
+        };
+
+        foreach ($payload as $inventoryUpdate) {
+            $existingFishState = $findFish($inventoryUpdate['fishId']);
+
+            if ($existingFishState !== null) {
+                $fish   = $existingFishState['fish'];
+                $amount = $existingFishState['amount'];
+
+                $diff = (int) ($inventoryUpdate['amount'] - $amount);
+            } else {
+                $diff = (int) $inventoryUpdate['amount'];
+                $fish = $this->fishManager->findOneById($inventoryUpdate['fishId']);
+
+                if ($fish === null) {
+                    throw new \Exception('Fish not found');
+                }
+            }
+
+            if ($diff !== 0) {
+                $mutation = new AquariumMutation($fish, $aquarium, $diff);
+
+                $this->validate($mutation);
+
+                $this->em->persist($mutation);
+            }
+        }
+
         $this->em->flush();
     }
 
