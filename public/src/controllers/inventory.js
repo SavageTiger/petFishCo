@@ -1,10 +1,11 @@
 
-app.controller('inventoryCtrl', ['$scope', 'Api', function ($scope, api) {
+app.controller('inventoryCtrl', ['$scope', 'Api', 'Collection', 'Notification', function ($scope, api, collection, notification) {
 
-    $scope.setDirty = function(sender) {
-        console.log(sender);
-    };
-
+    /**
+     * Open details view
+     *
+     * @param {uuid} aquariumId
+     */
     $scope.details = function(aquariumId) {
         api.getInventoryDetails(aquariumId).then(function (data) {
             $scope.aquarium = data.data;
@@ -12,8 +13,44 @@ app.controller('inventoryCtrl', ['$scope', 'Api', function ($scope, api) {
         });
     };
 
+    /**
+     * Add this kind of fish to the aquarium
+     *
+     * @param {object} fishKind
+     */
+    $scope.addFish = function(fishKind) {
+        for (var i in $scope.aquarium.inventory) {
+            if ($scope.aquarium.inventory[i].fish.id === fishKind.id) {
+                notification.warning('Unable to add new fish kind: <br /><b>This kind is already present in the tank.</b>');
+
+                return;
+            }
+        }
+
+        $scope.aquarium.inventory.push({
+            amount: 0,
+            fish: fishKind
+        });
+    };
+
+
+
+    /**
+     * Return to list view
+     */
+    $scope.back = function() {
+        $scope.aquarium = null;
+        $scope.viewType = 'list';
+    };
+
+    // Load inventory overview
     api.getInventoryList().then(function(data) {
         $scope.inventory = data.data;
+    });
+
+    // Load fishes
+    collection.load('fish', function(fishes) {
+        $scope.fishes = fishes;
     });
 
     $scope.viewType  = 'list';

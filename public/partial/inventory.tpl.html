@@ -21,10 +21,20 @@
                             <td width="10%">
                                 <span ng-if="viewType == 'list'">{{ inventoryItem.amount }}</span>
                                 <span ng-if="viewType == 'detail'">
-                                    <input type="text" class="form-control" ng-init="fishAmount[inventoryItem.fish.id] = inventoryItem.amount" ng-model="fishAmount[inventoryItem.fish.id]" />
+                                    <input type="text" class="form-control" ng-change="setChanged(inventoryItem.id)" ng-model="inventoryItem.amount" />
                                 </span>
                             </td>
                             <td>{{ inventoryItem.fish.name }}</td>
+                        </tr>
+                        <tr ng-if="viewType == 'detail'">
+                            <td>
+                                <button style="width: 100%;" ng-click="addFish(newFish)" class="float-right btn btn-outline-dark" ng-click="details(aquarium.id)" ng-disabled="!newFish">Add</button>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-options="o.name group by o.family for o in fishes" ng-model="newFish">
+                                    <option value="">Add a new fish...</option>
+                                </select>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -95,5 +105,4 @@
         </div>
     </div>
 
-</div>
 </div>
