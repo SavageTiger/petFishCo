@@ -26,7 +26,7 @@ class Picture implements PictureInterface
      * @param string $filename
      * @param string $binary
      */
-    public function __construct(string $filename, string $binary)
+    public function __construct(string $filename = 'unknown', string $binary = '')
     {
         $this->filename = $filename;
         $this->binary   = base64_encode($binary);

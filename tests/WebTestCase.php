@@ -25,15 +25,20 @@ class WebTestCase extends BaseWebTestCase
         $purger->purge();
 
         $fixtures = [
+            $container->get('petfishco.fixtures.restrictions'),
             $container->get('petfishco.fixtures.aquarium'),
             $container->get('petfishco.fixtures.fish'),
             $container->get('petfishco.fixtures.mutations'),
-            $container->get('petfishco.fixtures.restrictions')
         ];
 
         foreach ($fixtures as $fixtureService) {
             $fixtureService->load($objectManager);
         }
+
+        // Reset entity states
+        $doctrine = $container->get('doctrine');
+        $doctrine->getManager()->getConnection()->close();
+        $doctrine->getManager()->clear();
     }
 
     protected function queryApi($route, $data = [], $method = 'GET')

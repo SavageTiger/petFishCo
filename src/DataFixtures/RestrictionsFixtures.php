@@ -24,8 +24,8 @@ class RestrictionsFixtures extends AbstractFixture
 
         $restrictions[] =
             '{ ' .
-            'expression: "fish.getName() matches \"/Goudvis/i\" && evaluateCollection(aquarium.getFishes(), \'item.getName() matches \"/Guppy.*/i\"\')",' .
-            'message: "Goldfish don\'t go with guppies"' .
+                'expression: "fish.getName() matches \"/Goudvis/i\" && evaluateCollection(aquarium.getFishes(), \'item.getName() matches \"/Guppy.*/i\"\')",' .
+                'message: "Goldfish don\'t go with guppies"' .
             ' }';
 
         foreach ($restrictions as $restriction) {

@@ -10,14 +10,14 @@ class ApiEntityControllerTest extends WebTestCase
     {
         $expectedFish = [
             [
-                'name' => 'Goudvis',
+                'name'   => 'Goudvis',
                 'family' => 'Cyprinidae',
-                'color' => 'FF6C00'
+                'color'  => 'FF6C00'
             ],
             [
-                'name' => 'Guppy (Goud)',
+                'name'   => 'Guppy (Goud)',
                 'family' => 'Poeciliidae',
-                'color' => 'FF6C00'
+                'color'  => 'FF6C00'
             ]
         ];
 
@@ -47,11 +47,11 @@ class ApiEntityControllerTest extends WebTestCase
     public function testApiEntityLoadFish()
     {
         $expected = [
-            'name' => 'Goudvis',
+            'name'       => 'Goudvis',
             'latin_name' => 'Carassius gibelio auratus',
-            'family' => 'Cyprinidae',
-            'color' => 'FF6C00',
-            'fins' => 5
+            'family'     => 'Cyprinidae',
+            'color'      => 'FF6C00',
+            'fins'       => 5
         ];
 
         $list = $this->queryApi('/entity/list/fish');
@@ -69,9 +69,9 @@ class ApiEntityControllerTest extends WebTestCase
     {
         $expected = [
             'description' => 'In de wand achterin de winkel',
-            'shape' => 'Inbouw (muur)',
-            'glass_type' => 'Optiwhite Clear 12mm',
-            'volume' => 500,
+            'shape'       => 'Inbouw (muur)',
+            'glass_type'  => 'Optiwhite Clear 12mm',
+            'volume'      => 500,
             'volume_unit' => 'liters'
         ];
 
@@ -88,6 +88,49 @@ class ApiEntityControllerTest extends WebTestCase
         $response = $this->queryApi('/entity/load/aquarium/404');
 
         $this->assertSame('Not Found', $response['message']);
+    }
+
+    public function testEntityCreateFish()
+    {
+        $pixel = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+
+        $fields = [
+            'name'       => 'Real Big Fish',
+            'latin_name' => 'Skabandiii',
+            'family'     => 'Pomacentridae',
+            'color'      => '3096FF',
+            'fins'       => 999,
+            'picture'    => [ 'filename' => 'pixel.png', 'binary' => $pixel ]
+        ];
+
+        $apiResponse = $this->queryApi('/entity/fish', $fields, 'POST');
+        $this->assertSame('Fish was successfully updated', $apiResponse['message']);
+
+        $apiResponse = $this->queryApi('/entity/load/fish/' . $apiResponse['id']);
+        $this->assertArraySubset($fields, $apiResponse);
+    }
+
+    public function testEntityCreateAquarium()
+    {
+        $fields = [
+            'description' => 'Tiny tank',
+            'shape'       => 'Inbouw (muur)',
+            'glass_type'  => 'Optiwhite Clear 12mm',
+            'volume'      => 1,
+            'volume_unit' => 'gallons'
+        ];
+
+        $apiResponse = $this->queryApi('/entity/aquarium', $fields, 'POST');
+        $this->assertSame('Aquarium was successfully updated', $apiResponse['message']);
+
+        $apiResponse = $this->queryApi('/entity/load/aquarium/' . $apiResponse['id']);
+        $this->assertArraySubset($fields, $apiResponse);
+    }
+
+    public function testEntityNonExistentType()
+    {
+        $apiResponse = $this->queryApi('/entity/somethingElse', [], 'POST');
+        $this->assertSame('No manager found for requested type', $apiResponse['message']);
     }
 
     public function testEntityUpdateFish()
