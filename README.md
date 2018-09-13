@@ -15,7 +15,7 @@ By Sven Hagemann
 * Configure the .env file, all you need to do is set the DATABASE_URL
 * Create database / schema and load demo data
     * bin/console doctrine:database:create
-    * bin/console doctrine:database:create
+    * bin/console doctrine:schema:create
     * bin/console doctrine:fixtures:load
 * Make sure the var/ directory is writable by the webserver
 
