@@ -6,7 +6,7 @@ use SvenH\PetFishCo\Tests\WebTestCase;
 
 class ApiPropertiesControllerTest extends WebTestCase
 {
-    public function testApiUpdatePropertyList()
+    public function testApiPropertyList()
     {
         $response = $this->queryApi('/properties/list/Fish%20Family');
 
@@ -46,7 +46,7 @@ class ApiPropertiesControllerTest extends WebTestCase
         $this->assertSame('Please provide a name', $response['message']);
     }
 
-    public function testApiUpdatePropertyUpdate()
+    public function testApiUpdateProperty()
     {
         $displayName = 'Angels on the sideline, Puzzled and amused.';
         $typeId      = $this->getTypeId('Fish Family');
@@ -69,7 +69,7 @@ class ApiPropertiesControllerTest extends WebTestCase
 
     }
 
-    public function testApiUpdatePropertyUpdateNotFound()
+    public function testApiUpdatePropertyNotFound()
     {
         $typeId   = $this->getTypeId('Fish Family');
         $property = ['id' => '-837487487987182364', 'display_name' => '...'];

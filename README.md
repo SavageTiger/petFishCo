@@ -30,7 +30,7 @@ Configure the public/ as your vHost root folder. Everything should be ready to g
 
 Make sure you have an internet connection, since the javascript libraries are being loaded from CDN's .
 
-If their is trouble, you can debug by calling api.php/entity/list/fish and checking your webserver logs.
+If there is trouble, you can debug by calling api.php/entity/list/fish and checking your webserver logs.
 
 # Datamodel
 ![IMAGE DATAMODEL](./model.png)
