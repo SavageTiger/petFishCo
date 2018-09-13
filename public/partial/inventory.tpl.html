@@ -11,7 +11,7 @@
             <div class="col-md-9">
                 <div class="card-subtitle text-muted" ng-if="aquarium.inventory.length == 0">This aquarium is empty</div>
 
-                <div ng-if="aquarium.inventory.length > 0">
+                <div ng-if="aquarium.inventory.length > 0 || viewType == 'detail'">
                     <table class="table table-bordered table-sm">
                         <tr>
                             <th>Amount</th>
