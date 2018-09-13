@@ -3,9 +3,9 @@ By Sven Hagemann
 
 # Requirements
 * PHP 7.1
-    * Tested on PHP 7.1.20 but should work fine on never versions
+    * Tested on PHP 7.1.20 but should work fine on newer versions
 * MySQL
-    * Tested and build on 5.7.23, but any semi-recent version should be fine.
+    * Tested and build on 5.7.23, but any semi-recent version should be fine
     * Since all database interaction is done by Doctrine, should also work on other database platforms 
 
 # How to setup?
@@ -28,7 +28,7 @@ By Sven Hagemann
 # How to access?
 Configure the public/ as your vHost root folder. Everything should be ready to go.
 
-Make sure you have an internet connection, since the javascript libraries are being loaded from CDN's 
+Make sure you have an internet connection, since the javascript libraries are being loaded from CDN's .
 
 If their is trouble, you can debug by calling api.php/entity/list/fish and checking your webserver logs.
 
