@@ -126,7 +126,7 @@ class Aquarium implements AquariumInterface
      */
     public function setVolumeUnit(string $unit = 'liters')
     {
-        if ($unit !== 'liters' || $unit !== 'gallons') {
+        if ($unit !== 'liters' && $unit !== 'gallons') {
             throw new \Exception('Invalid unit supplied, accepted units are "liters" and "gallons"');
         }
 
