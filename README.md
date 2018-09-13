@@ -1,6 +1,13 @@
 # Usabilla challange StockApp
 By Sven Hagemann
 
+# Requirements
+* PHP 7.1
+    * Tested on PHP 7.1.20 but should work fine on never versions
+* MySQL
+    * Tested and build on 5.7.23, but any semi-recent version should be fine.
+    * Since all database interaction is done by Doctrine, should also work on other database platforms 
+
 # How to setup?
 * Pull this repo
 * Run composer install
