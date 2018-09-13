@@ -26,4 +26,4 @@ Make sure you have an internet connection, since the javascript libraries are be
 If their is trouble, you can debug by calling api.php/entity/list/fish and checking your webserver logs.
 
 # Datamodel
-[![IMAGE DATAMODEL](./model.png)]
+[![IMAGE DATAMODEL](./model.png)
